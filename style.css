@@ -1,0 +1,7 @@
+.bookCard {
+    background-color: antiquewhite;
+    display: flex;
+}
+.bookCard img {
+    width: 150px;
+}
