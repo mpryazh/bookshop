@@ -1,7 +1,28 @@
+main {
+    display: flex;
+}
+#bookCatalog {
+    display: flex;
+    flex-wrap: wrap;
+}
 .bookCard {
     background-color: antiquewhite;
     display: flex;
+    gap: 15px;
+    width: 400px;
+    margin: 10px;
 }
 .bookCard img {
-    width: 150px;
+    width: 180px;
+    align-self: flex-start;
+    /* height: 100%; */
 }
+.bookCard h2 {
+    height: 100px;
+    font-size: 20px;
+}
+#yourOrder {
+    width: 100%;
+}
+
+
