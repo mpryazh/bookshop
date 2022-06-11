@@ -1,9 +1,15 @@
+h1 {
+    text-align: center;
+}
 main {
     display: flex;
 }
 #bookCatalog {
     display: flex;
     flex-wrap: wrap;
+    width: 200%;
+    max-width: 840px;
+    justify-content: center;
 }
 .bookCard {
     background-color: antiquewhite;
@@ -15,7 +21,6 @@ main {
 .bookCard img {
     width: 180px;
     align-self: flex-start;
-    /* height: 100%; */
 }
 .bookCard h2 {
     height: 100px;
@@ -23,6 +28,42 @@ main {
 }
 #yourOrder {
     width: 100%;
+    margin: 0px;
+}
+#orderH2 {
+    text-align: center;
+}
+#orderContainer {
+    margin: 0px 8%;
+}
+#orderContainer figure {
+    display: flex;
+    height: 100px;
+    gap: 5px;
+    margin: 10px 0px;
+}
+#orderContainer img {
+    height: 100px;
+}
+#orderContainer div {
+    font-size: x-small;
+    margin: 0px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#orderContainer p, h2, h3 {
+    margin: 0px;
+}
+#orderContainer #sum {
+    margin: 10px;
 }
 
-
+#sum p {
+    text-align: right;
+    margin-right: 8%;
+}
+#sum #nothingHere {
+    text-align: left;
+    margin-left: 10%;
+}

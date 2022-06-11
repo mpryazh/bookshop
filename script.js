@@ -8,10 +8,7 @@ document.body.append(header, main);
 
 let bookCatalog = document.createElement('div');
 let orderBooks = document.createElement('div');
-////////////////////////////
-// let fragment = document.createDocumentFragment();
-// fragment.append(bookCatalog);
-////////////////////////////
+
 main.append(bookCatalog, orderBooks);
 
 bookCatalog.id = "bookCatalog";
@@ -29,30 +26,19 @@ function processData(data) {
     bookCard.insertAdjacentHTML("afterbegin", imgContent);
 
     let bookInfo = document.createElement('div');
-    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><h3>${book.price} $</h3></p>`
+    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><h3>$${book.price}</h3>`
     bookInfo.innerHTML = bookContent;
 
-    let bookImgContent = bookContent + imgContent;
+    let bookImgContent = imgContent +"<div>" + bookContent + "</div>";
 
 
     let bookButtons = document.createElement('div');
     bookButtons.innerHTML =  `<button id="showMore">Show more</button>
-                              <button id="addToCart" onclick="addBookToCart(\'${bookImgContent}\')">Add to cart</button>`;  // onclick="clickHndl(\'${bookImgContent}\'
+                              <button id="addToCart" onclick="addBookToCart(\'${bookImgContent}\')">Add to cart</button>`;
 
     bookInfo.append(bookButtons);
     bookCard.append(bookInfo);
-    bookCatalog.append(bookCard);
-
-
-    // event listener
-    // let addButton = document.getElementsByClassName("addToCart");
-    // addButton.addEventListener('click', event => {
-    //   orderContainer.innerHTML += `<div>${bookImgContent}</div>`;
-    // });
-
-
-
-    
+    bookCatalog.append(bookCard);    
   }
 }
 fetch('assets/books.json')
@@ -60,22 +46,30 @@ fetch('assets/books.json')
   .then(processData)
 
 // orderBooks
-orderBooks.innerHTML = "<h2>Your order</h2>";
+orderBooks.innerHTML = "<h2 id='orderH2'>Your order</h2>";
 orderBooks.id = "yourOrder";
 
 let orderContainer = document.createElement("div");
-// orderContainer.innerHTML = "<p>Nothing here yet...</p>"
+orderContainer.id = "orderContainer";
+let sum = document.createElement("div")
+sum.id = "sum";
+let totalPrice = 0;
+
+sum.innerHTML = "<p id='nothingHere'>Nothing here yet...</p>"
 
 orderBooks.append(orderContainer);
+orderBooks.append(sum);
 
 function addBookToCart(book) {
-  orderContainer.innerHTML += `<p>${book}</p>`;
+  orderContainer.innerHTML += `<figure>${book}</figure>  <hr>`;
+  changeSum(book.substr(-13, 2));
+  console.log(book.substr(-13, 2))
+}
+function changeSum(num) {
+  totalPrice += +num;
+  console.log(totalPrice);
+  let elem = document.getElementById("sum");
+  elem.innerHTML =  `<p>Total: $${totalPrice}</p>`
 }
 
-
-    // // event listener
-    // let addButton = document.getElementById("addToCart");
-    // addButton.addEventListener('click', event => {
-    //   orderContainer.innerHTML += `<div>${bookImgContent}</div>`;
-    // });
 
