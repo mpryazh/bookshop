@@ -19,29 +19,17 @@ header.innerHTML = "<h1>Welcome to Bookshop!</h1>";
 function processData(data) {
   for (const book of data) {
     // console.log((book.title));
-    let bookCard = document.createElement('a');
+    let bookCard = document.createElement('figure');
     bookCard.className = "bookCard";
 
-    // bookCard.href = "#";
     bookCard.title = "Show more";
-
-    
-
-    
-
-    // let bookDescription = document.createElement('div');
-    // bookDescription.className = "bookDescription";
-    // let descriptionContent = document.createElement('p');
-    // bookDescription.className = "description";
-    // descriptionContent.innerHTML = book.description;
-    
 
 
     let imgContent = `<img src=${book.imageLink} alt=&quot;book cover&quot;>`;
     bookCard.insertAdjacentHTML("afterbegin", imgContent);
 
     let bookInfo = document.createElement('div');
-    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><h3>$${book.price}</h3>`
+    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><a>Learn more</a><h3>$${book.price}</h3>`
     bookInfo.innerHTML = bookContent;
 
     let bookImgContent = imgContent +"<div>" + bookContent + "</div>";
@@ -54,19 +42,25 @@ function processData(data) {
                               </span>
                               </button>`;
 
-                              /*<button class="showMore"><span class="material-symbols-outlined">
-                              expand_more
-                              </span></button>*/
-
     bookInfo.append(bookButtons);
     bookCard.append(bookInfo);
     bookCatalog.append(bookCard);    
 
+    let bookDescription = document.createElement('div');
+    bookDescription.className = "bookDescription";
+    let descriptionContent = document.createElement('p');
+    descriptionContent.innerHTML = book.description;
+    let title = document.createElement('h3');
+    title.innerHTML = `${book.title}`;
+    let closeButton = document.createElement('button');
+    closeButton.innerHTML = "Close";
     
 
-    // bookDescription.append(descriptionContent);
+    bookDescription.append(title, descriptionContent, closeButton);
+
     // let price = document.getElementById("price");
-    // bookCard.onclick = function() {price.before(bookDescription)};
+    let learnMore = bookInfo.querySelector('.bookCard a');
+    learnMore.onclick = function() {bookCatalog.append(bookDescription)};
 
   }
 }
