@@ -19,8 +19,23 @@ header.innerHTML = "<h1>Welcome to Bookshop!</h1>";
 function processData(data) {
   for (const book of data) {
     // console.log((book.title));
-    let bookCard = document.createElement('figure');
+    let bookCard = document.createElement('a');
     bookCard.className = "bookCard";
+
+    // bookCard.href = "#";
+    bookCard.title = "Show more";
+
+    
+
+    
+
+    // let bookDescription = document.createElement('div');
+    // bookDescription.className = "bookDescription";
+    // let descriptionContent = document.createElement('p');
+    // bookDescription.className = "description";
+    // descriptionContent.innerHTML = book.description;
+    
+
 
     let imgContent = `<img src=${book.imageLink} alt=&quot;book cover&quot;>`;
     bookCard.insertAdjacentHTML("afterbegin", imgContent);
@@ -33,12 +48,26 @@ function processData(data) {
 
 
     let bookButtons = document.createElement('div');
-    bookButtons.innerHTML =  `<button id="showMore">Show more</button>
-                              <button id="addToCart" onclick="addBookToCart(\'${bookImgContent}\')">Add to cart</button>`;
+    bookButtons.innerHTML =  `<button class="addToCart" onclick="addBookToCart(\`${bookImgContent}\`)">
+                              <span class="material-symbols-outlined">
+                              add_shopping_cart
+                              </span>
+                              </button>`;
+
+                              /*<button class="showMore"><span class="material-symbols-outlined">
+                              expand_more
+                              </span></button>*/
 
     bookInfo.append(bookButtons);
     bookCard.append(bookInfo);
     bookCatalog.append(bookCard);    
+
+    
+
+    // bookDescription.append(descriptionContent);
+    // let price = document.getElementById("price");
+    // bookCard.onclick = function() {price.before(bookDescription)};
+
   }
 }
 fetch('assets/books.json')
@@ -61,15 +90,16 @@ orderBooks.append(orderContainer);
 orderBooks.append(sum);
 
 function addBookToCart(book) {
-  orderContainer.innerHTML += `<figure>${book}</figure>  <hr>`;
+  orderContainer.innerHTML += `<figure>${book}<button class="xButton">X</button></figure>  <hr>`;
   changeSum(book.substr(-13, 2));
-  console.log(book.substr(-13, 2))
 }
 function changeSum(num) {
   totalPrice += +num;
-  console.log(totalPrice);
   let elem = document.getElementById("sum");
-  elem.innerHTML =  `<p>Total: $${totalPrice}</p>`
+  elem.innerHTML =  `<pre>Total:  $${totalPrice}</pre>`
 }
+
+
+
 
 
