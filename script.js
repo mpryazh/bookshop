@@ -8,44 +8,42 @@ document.body.append(header, main);
 
 let bookCatalog = document.createElement('div');
 let orderBooks = document.createElement('div');
-
 main.append(bookCatalog, orderBooks);
-
 bookCatalog.id = "bookCatalog";
 
 header.innerHTML = "<h1>Welcome to Bookshop!</h1>";
 
 
 function processData(data) {
+
   for (const book of data) {
-    // console.log((book.title));
+    // create card
     let bookCard = document.createElement('figure');
     bookCard.className = "bookCard";
+    bookCatalog.append(bookCard);
 
-    bookCard.title = "Show more";
-
-
+    // image and info div
     let imgContent = `<img src=${book.imageLink} alt=&quot;book cover&quot;>`;
     bookCard.insertAdjacentHTML("afterbegin", imgContent);
 
     let bookInfo = document.createElement('div');
-    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><a>Learn more</a><h3>$${book.price}</h3>`
+    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><h3>$${book.price}</h3>`
     bookInfo.innerHTML = bookContent;
 
     let bookImgContent = imgContent +"<div>" + bookContent + "</div>";
 
-
-    let bookButtons = document.createElement('div');
-    bookButtons.innerHTML =  `<button class="addToCart" onclick="addBookToCart(\`${bookImgContent}\`)">
+    // add to cart button
+    let addToCart = document.createElement('div');
+    addToCart.innerHTML =  `<button class="addToCart" onclick="addBookToCart(\`${bookImgContent}\`)">
                               <span class="material-symbols-outlined">
                               add_shopping_cart
                               </span>
                               </button>`;
 
-    bookInfo.append(bookButtons);
+    bookInfo.append(addToCart);
     bookCard.append(bookInfo);
-    bookCatalog.append(bookCard);    
 
+    // create description div: h3, p, button
     let bookDescription = document.createElement('div');
     bookDescription.className = "bookDescription";
     let descriptionContent = document.createElement('p');
@@ -55,15 +53,18 @@ function processData(data) {
     let closeButton = document.createElement('button');
     closeButton.innerHTML = "Close";
     
-
     bookDescription.append(title, descriptionContent, closeButton);
 
-    // let price = document.getElementById("price");
-    let learnMore = bookInfo.querySelector('.bookCard a');
-    learnMore.onclick = function() {bookCatalog.append(bookDescription)};
-
-  }
+    // learn more button
+    let learnMore = document.createElement("button");
+    learnMore.innerHTML = "Learn more";
+    learnMore.id = "learnMore";
+    learnMore.onclick = () => createMessageUnder(learnMore, bookDescription);
+    let bookTitle = bookInfo.querySelector('h2');
+    bookTitle.after(learnMore);
+  } 
 }
+
 fetch('assets/books.json')
   .then(response => response.json())
   .then(processData)
@@ -92,8 +93,27 @@ function changeSum(num) {
   let elem = document.getElementById("sum");
   elem.innerHTML =  `<pre>Total:  $${totalPrice}</pre>`
 }
+function getCoords(elem) {
+  let box = elem.getBoundingClientRect();
 
+  return {
+    top: box.top + window.pageYOffset,
+    right: box.right + window.pageXOffset,
+    bottom: box.bottom + window.pageYOffset,
+    left: box.left + window.pageXOffset
+  };
+}
+function createMessageUnder(elem, html) {
+  let message = document.createElement('div');
 
+  let coords = getCoords(elem);
+  message.style.position = "absolute";
 
+  message.style.left = coords.left + "px";
+  message.style.top = coords.bottom + "px";
+
+  message.append(html);
+  document.body.append(message);
+}
 
 

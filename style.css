@@ -11,9 +11,18 @@ h3 {
 h1 {
     text-align: center;
 }
-a {
+#learnMore {
     text-decoration: none;
-    color: black;
+    border: none;
+    background-color: transparent;
+    text-align: left;
+    font-size: medium;
+    color: rgb(126, 126, 126);
+    cursor: pointer;
+    font-style: italic;
+}
+#learnMore:hover {
+    color:rgb(97, 23, 167)
 }
 main {
     display: flex;
@@ -42,7 +51,7 @@ main {
     align-self: flex-start;
 }
 .bookCard h2 {
-    height: 100px;
+    /* height: 100px; */
     font-size: 16px;
 }
 .bookCard p {
@@ -100,22 +109,20 @@ main {
 .addToCart {
     display: block;
     border: none;
-    background-color: rgb(166, 248, 134);
+    background-color: rgb(231, 233, 230);
     border-radius: 100%;
     width: 40px;
     height: 40px;
     margin-top: -55px;
     margin-right: 50px;
     margin-left: auto;
-    
+    cursor: pointer;   
+}
+.addToCart:hover {
+    background-color: rgb(166, 248, 134);
 }
 .addToCart span {
     padding-top: 4px;
-}
-.description {
-    /* visibility: hidden; */
-    background-color: black;
-
 }
 .xButton {
     height: 20px;
@@ -123,4 +130,17 @@ main {
     padding: 0px;
     justify-self: flex-end;
     background-color: rgb(228, 171, 171);
+}
+.bookDescription {
+    background-color: rgb(232, 255, 205);
+    width: 300px;
+    padding: 10px;
+    box-shadow: 0px 0px 7px 1px rgb(0 0 0 / 28%);
+}
+.bookDescription h3 {
+    text-align: center;
+}
+.bookDescription button {
+    margin-left: 80%;
+    align-self: flex-end;
 }
