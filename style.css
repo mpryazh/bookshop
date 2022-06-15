@@ -13,6 +13,7 @@ h1 {
 }
 #learnMore {
     text-decoration: none;
+    width:fit-content;
     border: none;
     background-color: transparent;
     text-align: left;
@@ -26,6 +27,7 @@ h1 {
 }
 main {
     display: flex;
+    justify-content: center;
 }
 #bookCatalog {
     display: flex;
@@ -35,7 +37,7 @@ main {
     justify-content: center;
 }
 .bookCard {
-    background-color: rgb(252, 244, 235);
+    background: linear-gradient(rgb(247, 247, 223), white);
     display: flex;
     gap: 15px;
     width: 400px;
@@ -60,30 +62,37 @@ main {
 #yourOrder {
     width: 100%;
     margin: 0px;
+    max-width: 550px;
 }
 #orderH2 {
     text-align: center;
 }
 #orderContainer {
-    margin: 0px 8%;
-}
-#orderContainer figure {
-    display: flex;
-    height: 100px;
-    gap: 5px;
-    margin: 10px 0px;
+    margin: 0px;
 }
 #orderContainer img {
     height: 100px;
 }
-#orderContainer div {
+hr {
+    color:black;
+    width: 100%;
+}
+.orderBookCard {
     font-size: x-small;
     margin: 0px;
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 100%;
+    min-width: 160px;
+}
+.orderBookCard div {
     display:flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
     min-width: 160px;
+    width: 100%;
+    margin: 5px 10px;
 }
 #orderContainer p, h2, h3 {
     margin: 0px;
@@ -96,7 +105,6 @@ main {
     margin-right: 8%;
     font-weight: 600;
     font-size: larger;
-    /* font-family: 'PT Sans', sans-serif; */
 }
 #sum #nothingHere {
     text-align: left;
@@ -124,12 +132,11 @@ main {
 .addToCart span {
     padding-top: 4px;
 }
-.xButton {
-    height: 20px;
-    width: 20px;
-    padding: 0px;
-    justify-self: flex-end;
-    background-color: rgb(228, 171, 171);
+.deleteButton {
+    border: none;
+    height:fit-content;
+    background-color: transparent;
+    color: rgb(170, 11, 11);
 }
 .bookDescription {
     background-color: rgb(232, 255, 205);

@@ -2,9 +2,7 @@
 let header = document.createElement('header');
 let main = document.createElement('main');
 
-
 document.body.append(header, main);
-
 
 let bookCatalog = document.createElement('div');
 let orderBooks = document.createElement('div');
@@ -15,7 +13,6 @@ header.innerHTML = "<h1>Welcome to Bookshop!</h1>";
 
 
 function processData(data) {
-
   for (const book of data) {
     // create card
     let bookCard = document.createElement('figure');
@@ -27,7 +24,7 @@ function processData(data) {
     bookCard.insertAdjacentHTML("afterbegin", imgContent);
 
     let bookInfo = document.createElement('div');
-    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><h3>$${book.price}</h3>`
+    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><h3 class='bookPrice'>$${book.price}</h3>`
     bookInfo.innerHTML = bookContent;
 
     let bookImgContent = imgContent +"<div>" + bookContent + "</div>";
@@ -35,10 +32,10 @@ function processData(data) {
     // add to cart button
     let addToCart = document.createElement('div');
     addToCart.innerHTML =  `<button class="addToCart" onclick="addBookToCart(\`${bookImgContent}\`)">
-                              <span class="material-symbols-outlined">
-                              add_shopping_cart
-                              </span>
-                              </button>`;
+        <span class="material-symbols-outlined">
+          add_shopping_cart
+        </span>
+        </button>`;
 
     bookInfo.append(addToCart);
     bookCard.append(bookInfo);
@@ -61,14 +58,13 @@ function processData(data) {
     let learnMore = document.createElement("button");
     learnMore.innerHTML = "Learn more";
     learnMore.id = "learnMore";
-    learnMore.addEventListener('click', (event) => createMessageUnder(event.target, bookDescription));
+    learnMore.addEventListener('click', (event) => popupDescription(event.target, bookDescription));
     let bookTitle = bookInfo.querySelector('h2');
     bookTitle.after(learnMore);
 } 
 }
 
 function removeElement(target, parentToBeRemovedCSS) {
-  console.log(target);
   target.closest(parentToBeRemovedCSS).remove();
 }
 
@@ -92,32 +88,36 @@ orderBooks.append(orderContainer);
 orderBooks.append(sum);
 
 function addBookToCart(book) {
-  let xButton = document.createElement("button");
-  xButton.innerHTML = "Xx";
-  xButton.className = "xButton";
-  xButton.onclick = () => alert("hi");
+  let orderBookPlusHr = document.createElement("figure");
 
-  let orderBookCard = document.createElement("figure");
+  let orderBookCard = document.createElement("div");
+  orderBookCard.className = "orderBookCard";
   orderBookCard.innerHTML = `${book}`;
-  orderBookCard.appendChild(xButton);
 
+  let deleteButton = document.createElement("button");
+  deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+  deleteButton.className = "deleteButton";
 
-  orderContainer.appendChild(orderBookCard);
-  orderContainer.innerHTML += "<hr>";
-  
-  let myButton = document.querySelectorAll(".xButton");
-  myButton.forEach((button) => button.addEventListener("click", (event) => removeElement(event.target, "figure")));
+  deleteButton.addEventListener("click", (event) => removeElement(event.target, "figure"));
+  deleteButton.addEventListener("click", () => calculateSum());
 
-  changeSum(book.substr(-13, 2));
+  orderBookCard.appendChild(deleteButton);
+
+  orderBookPlusHr.appendChild(orderBookCard);
+  orderBookPlusHr.appendChild(document.createElement("hr"));
+
+  orderContainer.appendChild(orderBookPlusHr);
+  calculateSum();
 }
-function changeSum(num) {
-  totalPrice += +num;
-  let elem = document.getElementById("sum");
-  elem.innerHTML =  `<pre>Total:  $${totalPrice}</pre>`
+function calculateSum() {
+  let prices = document.querySelectorAll(".orderBookCard .bookPrice");//.forEach(price => price.innerHTML.slice(1));
+  let total = 0;
+  prices.forEach(price => total += +price.innerHTML.slice(1));
+  let elem = document.getElementById("sum");  
+  elem.innerHTML =  `<pre>Total:  $${total}</pre>`
 }
 function getCoords(elem) {
   let box = elem.getBoundingClientRect();
-
   return {
     top: box.top + window.pageYOffset,
     right: box.right + window.pageXOffset,
@@ -125,7 +125,7 @@ function getCoords(elem) {
     left: box.left + window.pageXOffset
   };
 }
-function createMessageUnder(elem, html) {
+function popupDescription(elem, description) {
   let message = document.createElement('div');
 
   let coords = getCoords(elem);
@@ -134,7 +134,7 @@ function createMessageUnder(elem, html) {
   message.style.left = coords.left + "px";
   message.style.top = coords.bottom + "px";
 
-  message.append(html);
+  message.append(description);
   document.body.append(message);
 }
 
