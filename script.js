@@ -52,6 +52,8 @@ function processData(data) {
     title.innerHTML = `${book.title}`;
     let closeButton = document.createElement('button');
     closeButton.innerHTML = "Close";
+    closeButton.className = "closeBtn";
+    closeButton.addEventListener("click", (event) => removeElement(event.target,".bookDescription"));
     
     bookDescription.append(title, descriptionContent, closeButton);
 
@@ -59,10 +61,15 @@ function processData(data) {
     let learnMore = document.createElement("button");
     learnMore.innerHTML = "Learn more";
     learnMore.id = "learnMore";
-    learnMore.onclick = () => createMessageUnder(learnMore, bookDescription);
+    learnMore.addEventListener('click', (event) => createMessageUnder(event.target, bookDescription));
     let bookTitle = bookInfo.querySelector('h2');
     bookTitle.after(learnMore);
-  } 
+} 
+}
+
+function removeElement(target, parentToBeRemovedCSS) {
+  console.log(target);
+  target.closest(parentToBeRemovedCSS).remove();
 }
 
 fetch('assets/books.json')
@@ -85,7 +92,22 @@ orderBooks.append(orderContainer);
 orderBooks.append(sum);
 
 function addBookToCart(book) {
-  orderContainer.innerHTML += `<figure>${book}<button class="xButton">X</button></figure>  <hr>`;
+  let xButton = document.createElement("button");
+  xButton.innerHTML = "Xx";
+  xButton.className = "xButton";
+  xButton.onclick = () => alert("hi");
+
+  let orderBookCard = document.createElement("figure");
+  orderBookCard.innerHTML = `${book}`;
+  orderBookCard.appendChild(xButton);
+
+
+  orderContainer.appendChild(orderBookCard);
+  orderContainer.innerHTML += "<hr>";
+  
+  let myButton = document.querySelectorAll(".xButton");
+  myButton.forEach((button) => button.addEventListener("click", (event) => removeElement(event.target, "figure")));
+
   changeSum(book.substr(-13, 2));
 }
 function changeSum(num) {
