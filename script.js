@@ -17,26 +17,29 @@ function processData(data) {
     // create card
     let bookCard = document.createElement('figure');
     bookCard.className = "bookCard";
+    bookCard.draggable = "true";
     bookCatalog.append(bookCard);
+
+    // drag and drop a card
+    bookCard.addEventListener('dragstart', dragStart);
 
     // image and info div
     let imgContent = `<img src=${book.imageLink} alt=&quot;book cover&quot;>`;
     bookCard.insertAdjacentHTML("afterbegin", imgContent);
 
     let bookInfo = document.createElement('div');
-    let bookContent = `<p>${book.author}</p><h2>${book.title}</h2><h3 class='bookPrice'>$${book.price}</h3>`
+    let bookContent = `<p class = 'bookInfo'>${book.author}</p><h2 class='bookInfo'>${book.title}</h2><h3 class='bookPrice bookInfo'>$${book.price}</h3>`
     bookInfo.innerHTML = bookContent;
-
-    let bookImgContent = imgContent +"<div>" + bookContent + "</div>";
 
     // add to cart button
     let addToCart = document.createElement('div');
-    addToCart.innerHTML =  `<button class="addToCart" onclick="addBookToCart(\`${bookImgContent}\`)">
+    addToCart.innerHTML =  `<button class="addToCart" >   
         <span class="material-symbols-outlined">
           add_shopping_cart
         </span>
         </button>`;
 
+    addToCart.addEventListener("click", (event) => addBookToCart(event.target)); //addBookToCart
     bookInfo.append(addToCart);
     bookCard.append(bookInfo);
 
@@ -72,43 +75,20 @@ fetch('assets/books.json')
   .then(response => response.json())
   .then(processData)
 
-// orderBooks
+// orderBooks section
 orderBooks.innerHTML = "<h2 id='orderH2'>Your order</h2>";
 orderBooks.id = "yourOrder";
 
 let orderContainer = document.createElement("div");
 orderContainer.id = "orderContainer";
-let sum = document.createElement("div")
+let sum = document.createElement("div");
 sum.id = "sum";
 let totalPrice = 0;
-
-sum.innerHTML = "<p id='nothingHere'>Nothing here yet...</p>"
 
 orderBooks.append(orderContainer);
 orderBooks.append(sum);
 
-function addBookToCart(book) {
-  let orderBookPlusHr = document.createElement("figure");
-
-  let orderBookCard = document.createElement("div");
-  orderBookCard.className = "orderBookCard";
-  orderBookCard.innerHTML = `${book}`;
-
-  let deleteButton = document.createElement("button");
-  deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
-  deleteButton.className = "deleteButton";
-
-  deleteButton.addEventListener("click", (event) => removeElement(event.target, "figure"));
-  deleteButton.addEventListener("click", () => calculateSum());
-
-  orderBookCard.appendChild(deleteButton);
-
-  orderBookPlusHr.appendChild(orderBookCard);
-  orderBookPlusHr.appendChild(document.createElement("hr"));
-
-  orderContainer.appendChild(orderBookPlusHr);
-  calculateSum();
-}
+// calcualte total price
 function calculateSum() {
   let prices = document.querySelectorAll(".orderBookCard .bookPrice");//.forEach(price => price.innerHTML.slice(1));
   let total = 0;
@@ -116,6 +96,70 @@ function calculateSum() {
   let elem = document.getElementById("sum");  
   elem.innerHTML =  `<pre>Total:  $${total}</pre>`
 }
+
+// create book card in order
+function addBookToCart(target) {
+  let card = addBookInfo(target);
+  orderContainer.insertAdjacentElement('beforeend', card);
+  calculateSum();
+}
+
+// book info in order
+function addBookInfo(target) {
+  target = target.closest("figure");
+  const bookCover = target.querySelector("img").cloneNode(true);
+  const bookInfoCollection = target.querySelectorAll(".bookInfo");
+
+  let bookAndCover = document.createElement("div");
+  let bookInfo = document.createElement("div");
+
+  bookAndCover.className = "orderBookCard";
+  bookInfoCollection.forEach((line) => bookInfo.append(line.cloneNode(true)));
+
+  bookAndCover.append(bookCover, bookInfo);
+
+  let card = document.createElement("figure");
+  card.append(bookAndCover, document.createElement("hr"));
+
+  return addDeleteButton(card);
+}
+
+// delete button in order book card
+function addDeleteButton(card) {
+  let deleteButton = document.createElement("button");
+  deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+  deleteButton.className = "deleteButton";
+
+  deleteButton.addEventListener("click", (event) => removeElement(event.target, "figure"));
+  deleteButton.addEventListener("click", () => calculateSum());
+
+  card.querySelector(".orderBookCard").insertAdjacentElement("beforeend", deleteButton);
+
+  return card;
+}
+
+// drag and drop
+let dragged;
+orderContainer.addEventListener("dragover", dragOver);
+orderContainer.addEventListener("dragleave", dragLeave);
+orderContainer.addEventListener("drop", dragDrop);
+
+function dragStart(e) {
+  dragged = e.target;
+}
+function dragOver(e) {
+  e.preventDefault();
+  this.className = "hovered";
+}
+function dragLeave() {
+  this.className = "";
+}
+function dragDrop() {
+  this.className = "";
+  addBookToCart(dragged);
+}
+
+// for description popup
 function getCoords(elem) {
   let box = elem.getBoundingClientRect();
   return {

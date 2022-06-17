@@ -69,9 +69,17 @@ main {
 }
 #orderContainer {
     margin: 0px;
+    height: fit-content;
+    min-height: 140px;
 }
 #orderContainer img {
     height: 100px;
+}
+.hovered {
+    background-color: antiquewhite;
+}
+.normal {
+    background-color: transparent;
 }
 hr {
     color:black;
@@ -105,10 +113,6 @@ hr {
     margin-right: 8%;
     font-weight: 600;
     font-size: larger;
-}
-#sum #nothingHere {
-    text-align: left;
-    margin-left: 10%;
 }
 .showMore {
     background-color: transparent;
