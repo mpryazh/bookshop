@@ -39,7 +39,7 @@ function processData(data) {
         </span>
         </button>`;
 
-    addToCart.addEventListener("click", (event) => addBookToCart(event.target)); //addBookToCart
+    addToCart.addEventListener("click", (event) => addBookToCart(event.target));
     bookInfo.append(addToCart);
     bookCard.append(bookInfo);
 
@@ -85,16 +85,25 @@ let sum = document.createElement("div");
 sum.id = "sum";
 let totalPrice = 0;
 
-orderBooks.append(orderContainer);
-orderBooks.append(sum);
+let confirmOrderBtn = document.createElement("button");
+confirmOrderBtn.textContent = "Confirm order";
+confirmOrderBtn.className = "hidden";
+confirmOrderBtn.addEventListener("click", toOrderPage);
+
+orderBooks.append(orderContainer, sum, confirmOrderBtn);
 
 // calcualte total price
 function calculateSum() {
+  sum.hidden = false;
   let prices = document.querySelectorAll(".orderBookCard .bookPrice");//.forEach(price => price.innerHTML.slice(1));
   let total = 0;
   prices.forEach(price => total += +price.innerHTML.slice(1));
   let elem = document.getElementById("sum");  
   elem.innerHTML =  `<pre>Total:  $${total}</pre>`
+  if (total == 0) {
+    sum.hidden = true;
+    confirmOrderBtn.className = "hidden";
+  }
 }
 
 // create book card in order
@@ -102,6 +111,7 @@ function addBookToCart(target) {
   let card = addBookInfo(target);
   orderContainer.insertAdjacentElement('beforeend', card);
   calculateSum();
+  confirmOrderBtn.className = "confirmOrderBtn";
 }
 
 // book info in order
@@ -181,5 +191,7 @@ function popupDescription(elem, description) {
   message.append(description);
   document.body.append(message);
 }
-
+function toOrderPage() {
+  document.location.href = "order_page.html";
+}
 
