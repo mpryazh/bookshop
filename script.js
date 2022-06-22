@@ -191,7 +191,12 @@ function popupDescription(elem, description) {
   message.append(description);
   document.body.append(message);
 }
+// export const order = document.querySelector("#yourOrder");
+
 function toOrderPage() {
+  // let order = this.closest("#yourOrder");
+  
   document.location.href = "order_page.html";
 }
+
 
