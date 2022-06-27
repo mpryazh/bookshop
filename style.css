@@ -1,5 +1,6 @@
 body {
     font-family: 'Libre Franklin', sans-serif;
+    background: linear-gradient(rgba(221, 214, 219, 0.925), rgba(255, 208, 0, 0.13));
 }
 h2 {
     font-weight: 500;
@@ -37,7 +38,8 @@ main {
     justify-content: center;
 }
 .bookCard {
-    background: linear-gradient(rgb(247, 247, 223), white);
+    /* background: linear-gradient(rgb(247, 247, 223), white); */
+    background-color: rgba(255, 255, 255, 0.329);
     display: flex;
     gap: 15px;
     width: 400px;
@@ -157,16 +159,16 @@ hr {
     display: block; 
     background-color: rgb(166, 248, 134);
     border: none;
+    box-shadow: 0 1px 2px #0000004d;
 }
 .confirmOrderBtn:hover {
-    box-shadow: 0px 0px 7px 1px rgb(0 0 0 / 12%);
-    background-color: rgb(136, 235, 97);
+    background-color: rgb(138, 253, 92);
 }
 .bookDescription {
     background-color: rgb(232, 255, 205);
     width: 300px;
     padding: 10px;
-    box-shadow: 0px 0px 7px 1px rgb(0 0 0 / 28%);
+    box-shadow: 0 1px 2px #0000004d;
 }
 .bookDescription h3 {
     text-align: center;
@@ -177,7 +179,23 @@ hr {
 }
 input{
     display: block;
-    margin: 5px 10px 10px;
+    margin: 0px 10px;
+    padding: 2px 3px;
+}
+.required input {
+    justify-self: baseline;
+    width: 150px;
+}
+label {
+    display: flex;
+}
+.payment {
+    display: flex;
+}
+.paymentSpace, .giftSpace {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 #order {
     display:block;
@@ -185,18 +203,75 @@ input{
     margin-left: auto;
     margin-right: auto; 
 }
-fieldset {
+form {
     background-color: rgb(244, 247, 242);
     width: fit-content;
     padding: 20px 50px;;
     margin: auto;
+    box-shadow: 0 1px 2px #0000004d;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+    row-gap: 10px;
 }
-.required:after {
+form p {
+    width: 100%;
+    text-align: right;
+    margin: 0px;
+}
+label {
+    display: flex;
+    align-items: center;
+}
+.required {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: baseline;
+    justify-items: end;
+    grid-column: 1 / -1;
+}
+/* .required::before {
     content: "*";
-}
-input:valid {
+} */
+.validation:valid {
     background-color: rgb(218, 245, 207);
+    border-color: none;
 }
-input:invalid {
+.validation:invalid {
     background-color: rgb(245, 218, 207);
+}
+.complete {
+    grid-column: 1 / -1;
+}
+.complete:disabled {
+    background-color: rgba(187, 187, 187, 0.582);
+    box-shadow: 0 1px 2px #0000004d;
+}
+.complete:hover {
+    box-shadow: 0 1px 2px #0000004d;
+}
+#orderInfo {
+    position: fixed;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    padding: 20px 30px;
+    background-color: aliceblue;
+    filter: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 1px 2px #0000004d;
+}
+pre {
+    margin: 0px;
+    font-size: large;
+}
+.blurred {
+    background-color: rgba(142, 127, 150, 0.397);
+    filter: blur(2px);
+}
+.homeBtn {
+    margin-top: 25px;
 }
