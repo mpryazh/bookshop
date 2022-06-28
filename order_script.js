@@ -1,3 +1,4 @@
+"use strict";
 let header = document.createElement('header');
 let main = document.createElement('main');
 main.id = "order";
@@ -192,8 +193,7 @@ form.append(name_label,
 
 // limit gift checkboxes by 2
 const limit = 2;
-
-checkboxes = document.querySelectorAll("input[type='checkbox']");
+const checkboxes = document.querySelectorAll("input[type='checkbox']");
 checkboxes.forEach(checkbox => checkbox.addEventListener('click', (event) => {
     let checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
     if (event.currentTarget.checked && checked > limit) {
@@ -209,10 +209,10 @@ completeBtn.value = "Complete";
 completeBtn.className = "confirmOrderBtn complete";
 form.append(completeBtn);
 
-// highlight required fields
-decorateRequiredLabels();
+// set required fields
+setRequiredLabels();
 
-function decorateRequiredLabels() {
+function setRequiredLabels() {
     let labels = document.querySelectorAll("label");
 
     for (let label of labels) {
@@ -226,7 +226,7 @@ function decorateRequiredLabels() {
     }
 }
 
-// add validation when focus is away from input field
+// add validation
 let inputs = document.querySelectorAll("input");
 
 inputs.forEach(input => input.addEventListener('input', function(e) {
@@ -239,6 +239,8 @@ inputs.forEach(input => input.addEventListener('blur', function(e) {
         e.target.reportValidity(); 
     }
 }));
+
+// move focus to next field on enter
 inputs.forEach(input => input.addEventListener('keydown', function(e) {
     if (e.key == 'Enter') {
         e.preventDefault();
@@ -247,8 +249,7 @@ inputs.forEach(input => input.addEventListener('keydown', function(e) {
     }
 }));
 
-
-
+// enable complete button when all required fields are filled
 completeBtn.disabled = true;
 
 const requiredInputs = document.querySelectorAll("input:required");
@@ -260,12 +261,12 @@ function buttonState() {
     completeBtn.disabled = Array.from(requiredInputs).some(x => x.value === '');
 }
 
+// popup order info after submit
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     popup();
     form.ariaReadOnly = true;
     completeBtn.disabled = true;
-
 });
 
 function popup() {

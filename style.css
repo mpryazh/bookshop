@@ -1,6 +1,6 @@
 body {
     font-family: 'Libre Franklin', sans-serif;
-    background: linear-gradient(rgba(221, 214, 219, 0.925), rgba(255, 208, 0, 0.13));
+    background: rgb(253, 246, 246);
 }
 h2 {
     font-weight: 500;
@@ -38,12 +38,12 @@ main {
     justify-content: center;
 }
 .bookCard {
-    /* background: linear-gradient(rgb(247, 247, 223), white); */
-    background-color: rgba(255, 255, 255, 0.329);
+    background-color: rgba(255, 255, 255, 0.719);
     display: flex;
     gap: 15px;
     width: 400px;
     margin: 10px;
+    box-shadow: 0 1px 2px #0000004d;
 }
 .bookCard div {
     display: flex;
@@ -66,7 +66,7 @@ main {
     margin: 0px;
     max-width: 550px;
 }
-#orderH2 {
+#yourOrder >h2 {
     text-align: center;
 }
 #orderContainer {
@@ -157,12 +157,12 @@ hr {
     padding: 10px 15px;
     letter-spacing: 0.12em;
     display: block; 
-    background-color: rgb(166, 248, 134);
+    background-color: rgb(177, 252, 147);
     border: none;
     box-shadow: 0 1px 2px #0000004d;
 }
 .confirmOrderBtn:hover {
-    background-color: rgb(138, 253, 92);
+    background-color: rgb(166, 248, 134);
 }
 .bookDescription {
     background-color: rgb(232, 255, 205);
@@ -181,6 +181,7 @@ input{
     display: block;
     margin: 0px 10px;
     padding: 2px 3px;
+    border-radius: 4px;
 }
 .required input {
     justify-self: baseline;
@@ -206,7 +207,7 @@ label {
 form {
     background-color: rgb(244, 247, 242);
     width: fit-content;
-    padding: 20px 50px;;
+    padding: 20px 30px;;
     margin: auto;
     box-shadow: 0 1px 2px #0000004d;
     display: grid;
@@ -230,15 +231,12 @@ label {
     justify-items: end;
     grid-column: 1 / -1;
 }
-/* .required::before {
-    content: "*";
-} */
 .validation:valid {
-    background-color: rgb(218, 245, 207);
+    background-color: rgb(255, 255, 255);
     border-color: none;
 }
 .validation:invalid {
-    background-color: rgb(245, 218, 207);
+    background-color: rgb(250, 228, 219);
 }
 .complete {
     grid-column: 1 / -1;

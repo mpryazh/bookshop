@@ -5,12 +5,17 @@ let main = document.createElement('main');
 document.body.append(header, main);
 
 let bookCatalog = document.createElement('div');
+bookCatalog.id = "bookCatalog";
 let orderBooks = document.createElement('div');
 main.append(bookCatalog, orderBooks);
-bookCatalog.id = "bookCatalog";
 
 header.innerHTML = "<h1>Welcome to Bookshop!</h1>";
 
+let df = new DocumentFragment();
+
+fetch('assets/books.json')
+  .then(response => response.json())
+  .then(processData)
 
 function processData(data) {
   for (const book of data) {
@@ -18,7 +23,7 @@ function processData(data) {
     let bookCard = document.createElement('figure');
     bookCard.className = "bookCard";
     bookCard.draggable = "true";
-    bookCatalog.append(bookCard);
+    df.append(bookCard);
 
     // drag and drop a card
     bookCard.addEventListener('dragstart', dragStart);
@@ -49,9 +54,9 @@ function processData(data) {
     let descriptionContent = document.createElement('p');
     descriptionContent.innerHTML = book.description;
     let title = document.createElement('h3');
-    title.innerHTML = `${book.title}`;
+    title.textContent = `${book.title}`;
     let closeButton = document.createElement('button');
-    closeButton.innerHTML = "Close";
+    closeButton.textContent = "Close";
     closeButton.className = "closeBtn";
     closeButton.addEventListener("click", (event) => removeElement(event.target,".bookDescription"));
     
@@ -64,19 +69,16 @@ function processData(data) {
     learnMore.addEventListener('click', (event) => popupDescription(event.target, bookDescription));
     let bookTitle = bookInfo.querySelector('h2');
     bookTitle.after(learnMore);
-} 
+  } 
+bookCatalog.append(df);
 }
 
-function removeElement(target, parentToBeRemovedCSS) {
-  target.closest(parentToBeRemovedCSS).remove();
+function removeElement(target, parent) {
+  target.closest(parent).remove();
 }
-
-fetch('assets/books.json')
-  .then(response => response.json())
-  .then(processData)
 
 // orderBooks section
-orderBooks.innerHTML = "<h2 id='orderH2'>Your order</h2>";
+orderBooks.innerHTML = "<h2>Your order</h2>";
 orderBooks.id = "yourOrder";
 
 let orderContainer = document.createElement("div");
@@ -88,14 +90,14 @@ let totalPrice = 0;
 let confirmOrderBtn = document.createElement("button");
 confirmOrderBtn.textContent = "Confirm order";
 confirmOrderBtn.className = "hidden";
-confirmOrderBtn.addEventListener("click", toOrderPage);
+confirmOrderBtn.addEventListener("click", () => document.location.href = "order_page.html");
 
 orderBooks.append(orderContainer, sum, confirmOrderBtn);
 
 // calcualte total price
 function calculateSum() {
   sum.hidden = false;
-  let prices = document.querySelectorAll(".orderBookCard .bookPrice");//.forEach(price => price.innerHTML.slice(1));
+  let prices = document.querySelectorAll(".orderBookCard .bookPrice");
   let total = 0;
   prices.forEach(price => total += +price.innerHTML.slice(1));
   let elem = document.getElementById("sum");  
@@ -114,18 +116,17 @@ function addBookToCart(target) {
   confirmOrderBtn.className = "confirmOrderBtn";
 }
 
-// book info in order
+// order book info
 function addBookInfo(target) {
   target = target.closest("figure");
   const bookCover = target.querySelector("img").cloneNode(true);
-  const bookInfoCollection = target.querySelectorAll(".bookInfo");
+  const bookInfoList = target.querySelectorAll(".bookInfo");
+
+  let bookInfo = document.createElement("div");
+  bookInfoList.forEach((line) => bookInfo.append(line.cloneNode(true)));
 
   let bookAndCover = document.createElement("div");
-  let bookInfo = document.createElement("div");
-
   bookAndCover.className = "orderBookCard";
-  bookInfoCollection.forEach((line) => bookInfo.append(line.cloneNode(true)));
-
   bookAndCover.append(bookCover, bookInfo);
 
   let card = document.createElement("figure");
@@ -158,8 +159,8 @@ function dragStart(e) {
   dragged = e.target;
 }
 function dragOver(e) {
-  e.preventDefault();
   this.className = "hovered";
+  e.preventDefault();
 }
 function dragLeave() {
   this.className = "";
@@ -169,7 +170,7 @@ function dragDrop() {
   addBookToCart(dragged);
 }
 
-// for description popup
+// for book description popup
 function getCoords(elem) {
   let box = elem.getBoundingClientRect();
   return {
@@ -190,13 +191,6 @@ function popupDescription(elem, description) {
 
   message.append(description);
   document.body.append(message);
-}
-// export const order = document.querySelector("#yourOrder");
-
-function toOrderPage() {
-  // let order = this.closest("#yourOrder");
-  
-  document.location.href = "order_page.html";
 }
 
 
