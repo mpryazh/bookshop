@@ -44,22 +44,32 @@ main {
     width: 400px;
     margin: 10px;
     box-shadow: 0 1px 2px #0000004d;
+    border-radius: 5px;
 }
-.bookCard div {
+.bookCard > div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 15px 10px 0px 0px;
+}
+.bookCard > div > div {
+    padding: 0px 0px 20px 0px;
+    display: flex;
+    gap: 70px;
+    align-items: center;
 }
 .bookCard img {
     width: 180px;
-    align-self: flex-start;
+    align-self: center;
+    padding: 15px;
+    padding-right: 0px;
 }
 .bookCard h2 {
-    /* height: 100px; */
     font-size: 16px;
 }
 .bookCard p {
     font-size: 13px;
+    margin: 0px
 }
 #yourOrder {
     width: 100%;
@@ -127,9 +137,6 @@ hr {
     border-radius: 100%;
     width: 40px;
     height: 40px;
-    margin-top: -55px;
-    margin-right: 50px;
-    margin-left: auto;
     cursor: pointer;   
 }
 .addToCart:hover {
@@ -160,15 +167,17 @@ hr {
     background-color: rgb(177, 252, 147);
     border: none;
     box-shadow: 0 1px 2px #0000004d;
+    border-radius: 15px;
 }
 .confirmOrderBtn:hover {
     background-color: rgb(166, 248, 134);
 }
 .bookDescription {
-    background-color: rgb(232, 255, 205);
+    background-color: rgb(226, 222, 225);
     width: 300px;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0 1px 2px #0000004d;
+    border-radius: 4px;
 }
 .bookDescription h3 {
     text-align: center;
@@ -230,10 +239,6 @@ label {
     align-items: baseline;
     justify-items: end;
     grid-column: 1 / -1;
-}
-.validation:valid {
-    background-color: rgb(255, 255, 255);
-    border-color: none;
 }
 .validation:invalid {
     background-color: rgb(250, 228, 219);

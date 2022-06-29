@@ -8,8 +8,6 @@ document.body.append(header, main);
 
 let form = document.createElement("form");
 form.noValidate = true;
-// form.action = "action.php";
-// form.method = "post";
 main.append(form);
 
 // name
@@ -47,14 +45,11 @@ delivery_input.type = "date";
 delivery_input.required = true;
 delivery_label.append(delivery_input);
 
-// set min delivery date = tomorrow
+// min delivery date = tomorrow
 let today = new Date()
 today.setDate(today.getDate() + 1);
-let tomorrowTmp = today.toLocaleDateString();
-tomorrowTmp = tomorrowTmp.split(".");
-let tomorrow = [];
-tomorrow.push(tomorrowTmp[2],tomorrowTmp[1],tomorrowTmp[0]);
-tomorrow = tomorrow.join("-");
+let tomorrow = today.toLocaleDateString();
+tomorrow = tomorrow.split(".").reverse().join("-");
 delivery_input.value = tomorrow;
 delivery_input.min = tomorrow;
 
@@ -265,8 +260,10 @@ function buttonState() {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     popup();
+    //make form uneditable
     form.ariaReadOnly = true;
     completeBtn.disabled = true;
+    document.querySelectorAll("input").forEach(input => input.setAttribute("disabled", ""));
 });
 
 function popup() {
@@ -288,10 +285,5 @@ function popup() {
     orderInfo.append(info, homeBtn);
     form.className += " blurred";
 
-    //make form uneditable
-    document.querySelectorAll("input").forEach(input => input.setAttribute("readonly", "true"));
-    document.querySelectorAll("input[type=radio]").forEach(input => input.checked? true : input.setAttribute("disabled", ""));
-    document.querySelectorAll("input[type=checkbox]").forEach(input => input.checked? true : input.setAttribute("disabled", ""));
-    
     main.append(orderInfo);
 }

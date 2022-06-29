@@ -1,7 +1,6 @@
 "use strict";
 let header = document.createElement('header');
 let main = document.createElement('main');
-
 document.body.append(header, main);
 
 let bookCatalog = document.createElement('div');
@@ -19,7 +18,7 @@ fetch('assets/books.json')
 
 function processData(data) {
   for (const book of data) {
-    // create card
+    // book card
     let bookCard = document.createElement('figure');
     bookCard.className = "bookCard";
     bookCard.draggable = "true";
@@ -29,46 +28,34 @@ function processData(data) {
     bookCard.addEventListener('dragstart', dragStart);
 
     // image and info div
-    let imgContent = `<img src=${book.imageLink} alt=&quot;book cover&quot;>`;
+    let imgContent = `<img src=${book.imageLink} alt=''>`;
     bookCard.insertAdjacentHTML("afterbegin", imgContent);
 
     let bookInfo = document.createElement('div');
-    let bookContent = `<p class = 'bookInfo'>${book.author}</p><h2 class='bookInfo'>${book.title}</h2><h3 class='bookPrice bookInfo'>$${book.price}</h3>`
-    bookInfo.innerHTML = bookContent;
-
-    // add to cart button
-    let addToCart = document.createElement('div');
-    addToCart.innerHTML =  `<button class="addToCart" >   
-        <span class="material-symbols-outlined">
-          add_shopping_cart
-        </span>
-        </button>`;
-
-    addToCart.addEventListener("click", (event) => addBookToCart(event.target));
-    bookInfo.append(addToCart);
+    let bookContent = `<p class = 'bookInfo'>${book.author}</p><h2 class='bookInfo'>${book.title}</h2>`
+    bookInfo.insertAdjacentHTML("afterbegin", bookContent);
     bookCard.append(bookInfo);
-
-    // create description div: h3, p, button
-    let bookDescription = document.createElement('div');
-    bookDescription.className = "bookDescription";
-    let descriptionContent = document.createElement('p');
-    descriptionContent.innerHTML = book.description;
-    let title = document.createElement('h3');
-    title.textContent = `${book.title}`;
-    let closeButton = document.createElement('button');
-    closeButton.textContent = "Close";
-    closeButton.className = "closeBtn";
-    closeButton.addEventListener("click", (event) => removeElement(event.target,".bookDescription"));
-    
-    bookDescription.append(title, descriptionContent, closeButton);
 
     // learn more button
     let learnMore = document.createElement("button");
     learnMore.innerHTML = "Learn more";
     learnMore.id = "learnMore";
-    learnMore.addEventListener('click', (event) => popupDescription(event.target, bookDescription));
-    let bookTitle = bookInfo.querySelector('h2');
-    bookTitle.after(learnMore);
+    learnMore.addEventListener('click', (event) => popupDescription(event.target, book));
+
+    // price
+    let bookPrice = document.createElement('h3');
+    bookPrice.textContent = `$${book.price}`;
+    bookPrice.className = 'bookPrice bookInfo';
+
+    // add to cart button
+    let addToCart = document.createElement('button');
+    addToCart.innerHTML = '<span class="material-symbols-outlined">add_shopping_cart</span>';
+    addToCart.className = "addToCart";
+    addToCart.addEventListener("click", (event) => addBookToCart(event.target));
+
+    let priceAndButton = document.createElement("div");
+    priceAndButton.append(bookPrice, addToCart);
+    bookInfo.append(learnMore, priceAndButton);
   } 
 bookCatalog.append(df);
 }
@@ -170,9 +157,9 @@ function dragDrop() {
   addBookToCart(dragged);
 }
 
-// for book description popup
-function getCoords(elem) {
-  let box = elem.getBoundingClientRect();
+// book description popup
+function getCoords(target) {
+  let box = target.getBoundingClientRect();
   return {
     top: box.top + window.pageYOffset,
     right: box.right + window.pageXOffset,
@@ -180,17 +167,31 @@ function getCoords(elem) {
     left: box.left + window.pageXOffset
   };
 }
-function popupDescription(elem, description) {
+function popupDescription(target, book) {
   let message = document.createElement('div');
 
-  let coords = getCoords(elem);
+  let coords = getCoords(target);
   message.style.position = "absolute";
 
   message.style.left = coords.left + "px";
   message.style.top = coords.bottom + "px";
 
-  message.append(description);
+  message.append(makeDescriptionDiv(book.description, book.title));
   document.body.append(message);
 }
-
-
+// div to popup: h3, p, button
+function makeDescriptionDiv(description, title) {
+    let bookDescription = document.createElement('div');
+    bookDescription.className = "bookDescription";
+    let descriptionContent = document.createElement('p');
+    descriptionContent.textContent = description;
+    let descriptionTitle = document.createElement('h3');
+    descriptionTitle.textContent = `${title}`;
+    let closeButton = document.createElement('button');
+    closeButton.textContent = "Close";
+    closeButton.className = "closeBtn";
+    closeButton.addEventListener("click", (event) => removeElement(event.target,".bookDescription"));
+    
+    bookDescription.append(descriptionTitle, descriptionContent, closeButton);
+    return bookDescription;
+}
