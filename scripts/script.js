@@ -4,11 +4,11 @@ let main = document.createElement('main');
 document.body.append(header, main);
 
 let bookCatalog = document.createElement('div');
-bookCatalog.id = "bookCatalog";
+bookCatalog.id = "book-catalog";
 let orderBooks = document.createElement('div');
 main.append(bookCatalog, orderBooks);
 
-header.innerHTML = "<h1>Welcome to Bookshop!</h1>";
+header.innerHTML = "<h1>Bookshop</h1>";
 
 let df = new DocumentFragment();
 
@@ -20,7 +20,7 @@ function processData(data) {
   for (const book of data) {
     // book card
     let bookCard = document.createElement('figure');
-    bookCard.className = "bookCard";
+    bookCard.className = "book-card";
     bookCard.draggable = "true";
     df.append(bookCard);
 
@@ -32,25 +32,25 @@ function processData(data) {
     bookCard.insertAdjacentHTML("afterbegin", imgContent);
 
     let bookInfo = document.createElement('div');
-    let bookContent = `<p class = 'bookInfo'>${book.author}</p><h2 class='bookInfo'>${book.title}</h2>`
+    let bookContent = `<p class = 'book-info'>${book.author}</p><h3 class='book-info'>${book.title}</h3>`
     bookInfo.insertAdjacentHTML("afterbegin", bookContent);
     bookCard.append(bookInfo);
 
     // learn more button
     let learnMore = document.createElement("button");
-    learnMore.innerHTML = "Learn more";
-    learnMore.id = "learnMore";
+    learnMore.textContent = "Learn more";
+    learnMore.id = "learn-more";
     learnMore.addEventListener('click', (event) => popupDescription(event.target, book));
 
     // price
     let bookPrice = document.createElement('h3');
     bookPrice.textContent = `$${book.price}`;
-    bookPrice.className = 'bookPrice bookInfo';
+    bookPrice.className = 'book-price book-info';
 
     // add to cart button
     let addToCart = document.createElement('button');
-    addToCart.innerHTML = '<span class="material-symbols-outlined">add_shopping_cart</span>';
-    addToCart.className = "addToCart";
+    addToCart.textContent = 'Add to cart';
+    addToCart.className = "add-to-cart green-btn";
     addToCart.addEventListener("click", (event) => addBookToCart(event.target));
 
     let priceAndButton = document.createElement("div");
@@ -66,17 +66,17 @@ function removeElement(target, parent) {
 
 // orderBooks section
 orderBooks.innerHTML = "<h2>Your order</h2>";
-orderBooks.id = "yourOrder";
+orderBooks.id = "your-order";
 
 let orderContainer = document.createElement("div");
-orderContainer.id = "orderContainer";
+orderContainer.id = "order-container";
 let sum = document.createElement("div");
 sum.id = "sum";
 let totalPrice = 0;
 
 let confirmOrderBtn = document.createElement("button");
 confirmOrderBtn.textContent = "Confirm order";
-confirmOrderBtn.className = "hidden";
+confirmOrderBtn.className = "hidden green-btn confirm-order";
 confirmOrderBtn.addEventListener("click", () => document.location.href = "order_page.html");
 
 orderBooks.append(orderContainer, sum, confirmOrderBtn);
@@ -84,14 +84,14 @@ orderBooks.append(orderContainer, sum, confirmOrderBtn);
 // calcualte total price
 function calculateSum() {
   sum.hidden = false;
-  let prices = document.querySelectorAll(".orderBookCard .bookPrice");
+  let prices = document.querySelectorAll(".order-book-card .book-price");
   let total = 0;
   prices.forEach(price => total += +price.innerHTML.slice(1));
   let elem = document.getElementById("sum");  
-  elem.innerHTML =  `<pre>Total:  $${total}</pre>`
+  elem.innerHTML =  `<div>Total: &nbsp&nbsp$${total}</div>`
   if (total == 0) {
     sum.hidden = true;
-    confirmOrderBtn.className = "hidden";
+    confirmOrderBtn.className += " hidden";
   }
 }
 
@@ -100,38 +100,43 @@ function addBookToCart(target) {
   let card = addBookInfo(target);
   orderContainer.insertAdjacentElement('beforeend', card);
   calculateSum();
-  confirmOrderBtn.className = "confirmOrderBtn";
+  confirmOrderBtn.classList.remove("hidden");
 }
 
 // order book info
 function addBookInfo(target) {
   target = target.closest("figure");
   const bookCover = target.querySelector("img").cloneNode(true);
-  const bookInfoList = target.querySelectorAll(".bookInfo");
+  const bookInfoList = target.querySelectorAll(".book-info");
 
   let bookInfo = document.createElement("div");
   bookInfoList.forEach((line) => bookInfo.append(line.cloneNode(true)));
 
   let bookAndCover = document.createElement("div");
-  bookAndCover.className = "orderBookCard";
+  bookAndCover.className = "order-book-card";
   bookAndCover.append(bookCover, bookInfo);
 
   let card = document.createElement("figure");
   card.append(bookAndCover, document.createElement("hr"));
+  card = addDeleteButton(card);
 
-  return addDeleteButton(card);
+  return card;
 }
 
 // delete button in order book card
 function addDeleteButton(card) {
   let deleteButton = document.createElement("button");
-  deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
-  deleteButton.className = "deleteButton";
+  let deleteIcon = document.createElement("span");
+  deleteIcon.className = "material-symbols-outlined";
+  deleteIcon.textContent = "delete";
+  deleteButton.append(deleteIcon);
+
+  deleteButton.className = "delete-button";
 
   deleteButton.addEventListener("click", (event) => removeElement(event.target, "figure"));
   deleteButton.addEventListener("click", () => calculateSum());
 
-  card.querySelector(".orderBookCard").insertAdjacentElement("beforeend", deleteButton);
+  card.querySelector(".order-book-card").insertAdjacentElement("beforeend", deleteButton);
 
   return card;
 }
@@ -182,15 +187,15 @@ function popupDescription(target, book) {
 // div to popup: h3, p, button
 function makeDescriptionDiv(description, title) {
     let bookDescription = document.createElement('div');
-    bookDescription.className = "bookDescription";
+    bookDescription.className = "book-description";
     let descriptionContent = document.createElement('p');
     descriptionContent.textContent = description;
     let descriptionTitle = document.createElement('h3');
     descriptionTitle.textContent = `${title}`;
     let closeButton = document.createElement('button');
     closeButton.textContent = "Close";
-    closeButton.className = "closeBtn";
-    closeButton.addEventListener("click", (event) => removeElement(event.target,".bookDescription"));
+    closeButton.className = "close-btn green-btn";
+    closeButton.addEventListener("click", (event) => removeElement(event.target,".book-description"));
     
     bookDescription.append(descriptionTitle, descriptionContent, closeButton);
     return bookDescription;

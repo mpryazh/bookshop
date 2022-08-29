@@ -1,6 +1,17 @@
+:root {
+    --green: rgba(91, 201, 47, 0.801);
+    --black: rgb(58, 58, 58);
+}
 body {
-    font-family: 'Libre Franklin', sans-serif;
-    background: rgb(253, 246, 246);
+    font-family: 'Noto Sans', sans-serif;
+    background: rgb(253, 248, 248);
+    color: var(--black);
+}
+h1 {
+    text-align: center;
+    color: var(--green);
+    letter-spacing: 0.05rem;
+    margin: 30px auto;
 }
 h2 {
     font-weight: 500;
@@ -8,83 +19,76 @@ h2 {
 }
 h3 {
     font-weight: 500;
+    font-size: 13px;
 }
-h1 {
-    text-align: center;
+p {
+    font-size: 11px;
+    margin: 0;
 }
-#learnMore {
+#learn-more {
     text-decoration: none;
-    width:fit-content;
     border: none;
     background-color: transparent;
     text-align: left;
-    font-size: medium;
+    font-size: small;
     color: rgb(126, 126, 126);
     cursor: pointer;
     font-style: italic;
+    padding: 0;
 }
-#learnMore:hover {
+#learn-more:hover {
     color:rgb(97, 23, 167)
 }
 main {
     display: flex;
     justify-content: center;
 }
-#bookCatalog {
+#book-catalog {
     display: flex;
     flex-wrap: wrap;
-    width: 200%;
     max-width: 840px;
     justify-content: center;
 }
-.bookCard {
+.book-card {
+    padding: 15px;
     background-color: rgba(255, 255, 255, 0.719);
     display: flex;
     gap: 15px;
-    width: 400px;
+    width: 320px;
     margin: 10px;
-    box-shadow: 0 1px 2px #0000004d;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    border: 1px solid rgb(219, 219, 219);
 }
-.bookCard > div {
+.book-card > div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15px 10px 0px 0px;
+    padding: 0 15px 0 0;
 }
-.bookCard > div > div {
-    padding: 0px 0px 20px 0px;
+.book-card > div > div {
+    padding: 0;
+    padding-bottom: 5px;
     display: flex;
-    gap: 70px;
     align-items: center;
+    justify-content: space-between;
 }
-.bookCard img {
-    width: 180px;
+.book-card img {
+    width: 120px;
     align-self: center;
-    padding: 15px;
-    padding-right: 0px;
 }
-.bookCard h2 {
-    font-size: 16px;
-}
-.bookCard p {
-    font-size: 13px;
-    margin: 0px
-}
-#yourOrder {
-    width: 100%;
+#your-order {
     margin: 0px;
     max-width: 550px;
 }
-#yourOrder >h2 {
+#your-order > h2 {
     text-align: center;
 }
-#orderContainer {
+#order-container {
     margin: 0px;
-    height: fit-content;
     min-height: 140px;
+    width: 400px;
 }
-#orderContainer img {
+#order-container img {
     height: 100px;
 }
 .hovered {
@@ -94,11 +98,13 @@ main {
     background-color: transparent;
 }
 hr {
-    color:black;
+    background-color: rgb(219, 219, 219);
     width: 100%;
+    height: 1px;
+    border-width: 0;
 }
-.orderBookCard {
-    font-size: x-small;
+.order-book-card {
+    font-size: 9px;
     margin: 0px;
     display: flex;
     flex-direction: row;
@@ -106,7 +112,7 @@ hr {
     width: 100%;
     min-width: 160px;
 }
-.orderBookCard div {
+.order-book-card div {
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -114,80 +120,82 @@ hr {
     width: 100%;
     margin: 5px 10px;
 }
-#orderContainer p, h2, h3 {
+.order-book-card p {
+    display: none;
+}
+.order-book-card .book-price {
+    font-size: small;
+}
+#order-container p, h2, h3 {
     margin: 0px;
 }
-#orderContainer #sum {
-    margin: 10px;
-}
-#sum pre {
+#sum {
+    margin: 0px;
     text-align: right;
-    margin-right: 8%;
-    font-weight: 600;
-    font-size: larger;
+    margin-right: 40px;
+    font-weight: 500;
+    letter-spacing: 0.04rem;
+    font-size: medium;
+    font-family: 'Noto Sans', sans-serif;
 }
-.showMore {
-    background-color: transparent;
+.green-btn {
+    background-color: var(--green);
+    color: white;
     border: none;
+    border-radius: 8px;
+    cursor: pointer; 
+    padding: 6px 15px;
+    font-family: 'Noto Sans', sans-serif;
 }
-.addToCart {
-    display: block;
-    border: none;
-    background-color: rgb(231, 233, 230);
-    border-radius: 100%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;   
+.green-btn:hover {
+    background-color: rgb(127, 224, 89);
+    box-shadow: 0 1px 2px #0000004d;
 }
-.addToCart:hover {
-    background-color: rgb(166, 248, 134);
+.add-to-cart {
+    height: 30px; 
 }
-.addToCart span {
+.add-to-cart span {
     padding-top: 4px;
 }
-.deleteButton {
+.delete-button {
     border: none;
-    height:fit-content;
+    height: 20px;
     background-color: transparent;
     color: rgb(170, 11, 11);
 }
-.deleteButton:hover {
+.delete-button:hover {
     color: rgb(219, 17, 17);
 }
-.hidden {
-    display: none;
+.delete-button span {
+    font-size: 20px;
 }
-.confirmOrderBtn {
-    margin-right: auto;
-    margin-left: auto;
+.hidden {
+    display: none !important;
+}
+.confirm-order {
+    margin: auto;
     margin-top: 20px;
     padding: 10px 15px;
     letter-spacing: 0.12em;
     display: block; 
-    background-color: rgb(177, 252, 147);
-    border: none;
-    box-shadow: 0 1px 2px #0000004d;
-    border-radius: 15px;
 }
-.confirmOrderBtn:hover {
-    background-color: rgb(166, 248, 134);
-}
-.bookDescription {
-    background-color: rgb(226, 222, 225);
+.book-description {
+    background-color: rgb(253, 243, 251);
     width: 300px;
     padding: 20px;
     box-shadow: 0 1px 2px #0000004d;
     border-radius: 4px;
 }
-.bookDescription h3 {
+.book-description h3 {
     text-align: center;
 }
-.bookDescription button {
+.book-description button {
     margin-left: 80%;
     align-self: flex-end;
 }
 input{
     display: block;
+    border: 1px solid rgb(194, 191, 191);
     margin: 0px 10px;
     padding: 2px 3px;
     border-radius: 4px;
@@ -219,6 +227,7 @@ form {
     padding: 20px 30px;;
     margin: auto;
     box-shadow: 0 1px 2px #0000004d;
+    border-radius: 5px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: start;
@@ -228,10 +237,16 @@ form p {
     width: 100%;
     text-align: right;
     margin: 0px;
+    font-size: 15px;
+    margin-top: 12px;
+}
+form div {
+    margin-top: 12px;
 }
 label {
     display: flex;
     align-items: center;
+    font-size: 15px;
 }
 .required {
     display: grid;
@@ -253,7 +268,7 @@ label {
 .complete:hover {
     box-shadow: 0 1px 2px #0000004d;
 }
-#orderInfo {
+#order-info {
     position: fixed;
     top: 50%; 
     left: 50%; 
@@ -261,20 +276,17 @@ label {
     width: fit-content;
     padding: 20px 30px;
     background-color: aliceblue;
+    border-radius: 5px;
     filter: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 1px 2px #0000004d;
 }
-pre {
-    margin: 0px;
-    font-size: large;
-}
 .blurred {
     background-color: rgba(142, 127, 150, 0.397);
     filter: blur(2px);
 }
-.homeBtn {
+.home-btn {
     margin-top: 25px;
 }

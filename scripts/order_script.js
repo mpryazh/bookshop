@@ -159,7 +159,7 @@ discount_input.type = "checkbox";
 discount_label.prepend(discount_input);
 
 let pen_label = document.createElement("label");
-pen_label.textContent = "Add a branded pen or a pencil";
+pen_label.textContent = "Add a branded pen";
 pen_label.for = "pen";
 let pen_input = document.createElement("input");
 pen_input.id = "pen";
@@ -201,7 +201,7 @@ checkboxes.forEach(checkbox => checkbox.addEventListener('click', (event) => {
 let completeBtn = document.createElement("input");
 completeBtn.type = "submit";
 completeBtn.value = "Complete";
-completeBtn.className = "confirmOrderBtn complete";
+completeBtn.className = "confirm-order complete green-btn";
 form.append(completeBtn);
 
 // set required fields
@@ -268,7 +268,7 @@ form.addEventListener('submit', (e) => {
 
 function popup() {
     let orderInfo = document.createElement('div');
-    orderInfo.id = "orderInfo";
+    orderInfo.id = "order-info";
 
     let info = document.createElement('pre');
     info.textContent = `
@@ -279,7 +279,7 @@ function popup() {
 
     let homeBtn = document.createElement('button');
     homeBtn.textContent = 'Back to shop';
-    homeBtn.classList = 'homeBtn confirmOrderBtn';
+    homeBtn.className = 'home-btn confirm-order green-btn';
     homeBtn.addEventListener('click', () => location.href = 'index.html');
 
     orderInfo.append(info, homeBtn);
