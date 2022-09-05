@@ -17,7 +17,7 @@ function popupOrder(e) {
     "home-btn confirm-order green-btn",
     "Back to shop"
   );
-  homeBtn.addEventListener("click", () => (location.href = "index.html"));
+  homeBtn.addEventListener("click", () => (location.href = "../main/index.html"));
 
   orderInfo.append(info, homeBtn);
   document.body.append(orderInfo);

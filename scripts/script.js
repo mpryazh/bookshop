@@ -36,7 +36,7 @@ const confirmOrderBtn = createElement(
 );
 confirmOrderBtn.addEventListener(
   "click",
-  () => (document.location.href = "form_page.html")
+  () => (document.location.href = "../form/form_page.html")
 );
 
 orderContainer.append(emptyOrderMessage);
