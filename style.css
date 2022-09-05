@@ -1,292 +1,208 @@
 :root {
-    --green: rgba(91, 201, 47, 0.801);
-    --black: rgb(58, 58, 58);
+  --green: rgba(91, 201, 47, 0.801);
+  --black: rgb(58, 58, 58);
+  --gray: rgb(219, 219, 219);
 }
 body {
-    font-family: 'Noto Sans', sans-serif;
-    background: rgb(253, 248, 248);
-    color: var(--black);
+  font-family: "Noto Sans", sans-serif;
+  background: rgb(253, 248, 248);
+  color: var(--black);
+  margin: 0;
 }
 h1 {
-    text-align: center;
-    color: var(--green);
-    letter-spacing: 0.05rem;
-    margin: 30px auto;
+  text-align: center;
+  color: white;
+  letter-spacing: 0.05rem;
 }
 h2 {
-    font-weight: 500;
-    line-height: 1.2em;
+  font-weight: 500;
+  line-height: 1.2em;
+  margin: 0;
 }
 h3 {
-    font-weight: 500;
-    font-size: 13px;
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
 }
 p {
-    font-size: 11px;
-    margin: 0;
+  font-size: 11px;
+  margin: 0;
 }
-#learn-more {
-    text-decoration: none;
-    border: none;
-    background-color: transparent;
-    text-align: left;
-    font-size: small;
-    color: rgb(126, 126, 126);
-    cursor: pointer;
-    font-style: italic;
-    padding: 0;
-}
-#learn-more:hover {
-    color:rgb(97, 23, 167)
+header {
+  background-color: var(--green);
+  margin: 0;
+  padding: 1px;
+  margin-bottom: 20px;
 }
 main {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+.learn-more {
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  font-size: small;
+  color: rgb(126, 126, 126);
+  cursor: pointer;
+  font-style: italic;
+  padding: 0;
+}
+.learn-more:hover {
+  color: rgb(97, 23, 167);
 }
 #book-catalog {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 840px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 840px;
+  justify-content: center;
 }
 .book-card {
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.719);
-    display: flex;
-    gap: 15px;
-    width: 320px;
-    margin: 10px;
-    /* border-radius: 5px; */
-    border: 1px solid rgb(219, 219, 219);
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.719);
+  display: flex;
+  gap: 15px;
+  width: 320px;
+  margin: 10px;
+  border: 1px solid var(--gray);
 }
-.book-card > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0 15px 0 0;
+.book-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 15px 0 0;
 }
-.book-card > div > div {
-    padding: 0;
-    padding-bottom: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.book-info > div {
+  padding: 0;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .book-card img {
-    width: 120px;
-    align-self: center;
+  width: 120px;
+  align-self: center;
 }
 #your-order {
-    margin: 0px;
-    max-width: 550px;
+  margin: 0px;
+  max-width: 550px;
 }
 #your-order > h2 {
-    text-align: center;
+  text-align: center;
 }
 #order-container {
-    margin: 0px;
-    min-height: 140px;
-    width: 400px;
+  margin: 0px;
+  min-height: 140px;
+  min-width: 340px;
+  margin: 15px 0;
 }
 #order-container img {
-    height: 100px;
+  width: 80px;
 }
 .hovered {
-    background-color: antiquewhite;
+  background-color: antiquewhite;
 }
 .normal {
-    background-color: transparent;
+  background-color: transparent;
 }
-hr {
-    background-color: rgb(219, 219, 219);
-    width: 100%;
-    height: 1px;
-    border-width: 0;
+#empty-order {
+  font-size: 14px;
+  text-align: center;
+}
+.order-book-card .learn-more,
+.order-book-card .add-to-cart {
+  display: none;
 }
 .order-book-card {
-    font-size: 9px;
-    margin: 0px;
-    display: flex;
-    flex-direction: row;
-    height: 100px;
-    width: 100%;
-    min-width: 160px;
+  margin: 0;
+  padding: 10px 5px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 0fr;
+  justify-content: space-between;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(219, 219, 219);
 }
-.order-book-card div {
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-width: 160px;
-    width: 100%;
-    margin: 5px 10px;
-}
-.order-book-card p {
-    display: none;
+.order-book-card .book-info {
+  padding: 0;
 }
 .order-book-card .book-price {
-    font-size: small;
+  font-size: small;
 }
-#order-container p, h2, h3 {
-    margin: 0px;
+#order-container p {
+  margin: 0;
 }
 #sum {
-    margin: 0px;
-    text-align: right;
-    margin-right: 40px;
-    font-weight: 500;
-    letter-spacing: 0.04rem;
-    font-size: medium;
-    font-family: 'Noto Sans', sans-serif;
+  text-align: right;
+  padding-right: 40px;
+  font-weight: 500;
+  letter-spacing: 0.04rem;
+  font-size: medium;
+  font-family: "Noto Sans", sans-serif;
 }
 .green-btn {
-    background-color: var(--green);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer; 
-    padding: 6px 15px;
-    font-family: 'Noto Sans', sans-serif;
+  background-color: var(--green);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 6px 15px;
+  font-family: "Noto Sans", sans-serif;
 }
 .green-btn:hover {
-    background-color: rgb(127, 224, 89);
-    box-shadow: 0 1px 2px #0000004d;
+  background-color: rgb(127, 224, 89);
+  box-shadow: 0 1px 2px #0000004d;
 }
 .add-to-cart {
-    height: 30px; 
+  height: 30px;
 }
 .add-to-cart span {
-    padding-top: 4px;
+  padding-top: 4px;
 }
 .delete-button {
-    border: none;
-    height: 20px;
-    background-color: transparent;
-    color: rgb(170, 11, 11);
+  border: none;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  color: rgb(170, 11, 11);
 }
 .delete-button:hover {
-    color: rgb(219, 17, 17);
+  color: rgb(219, 17, 17);
 }
 .delete-button span {
-    font-size: 20px;
+  font-size: 20px;
 }
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 .confirm-order {
-    margin: auto;
-    margin-top: 20px;
-    padding: 10px 15px;
-    letter-spacing: 0.12em;
-    display: block; 
+  margin: auto;
+  margin-top: 20px;
+  padding: 10px 15px;
+  letter-spacing: 0.07em;
+  display: block;
 }
 .book-description {
-    background-color: rgb(253, 243, 251);
-    width: 300px;
-    padding: 20px;
-    box-shadow: 0 1px 2px #0000004d;
-    border-radius: 4px;
+  background-color: rgb(253, 243, 251);
+  width: 300px;
+  padding: 25px 20px 20px;
+  box-shadow: 0 1px 2px #0000004d;
+  border-radius: 4px;
 }
 .book-description h3 {
-    text-align: center;
+  text-align: center;
+  padding-bottom: 10px;
 }
-.book-description button {
-    margin-left: 80%;
-    align-self: flex-end;
+.close-btn {
+  position: absolute;
+  right: 2px;
+  top: 5px;
+  border: none;
+  background-color: transparent;
 }
-input{
-    display: block;
-    border: 1px solid rgb(194, 191, 191);
-    margin: 0px 10px;
-    padding: 2px 3px;
-    border-radius: 4px;
-}
-.required input {
-    justify-self: baseline;
-    width: 150px;
-}
-label {
-    display: flex;
-}
-.payment {
-    display: flex;
-}
-.paymentSpace, .giftSpace {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-#order {
-    display:block;
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto; 
-}
-form {
-    background-color: rgb(244, 247, 242);
-    width: fit-content;
-    padding: 20px 30px;;
-    margin: auto;
-    box-shadow: 0 1px 2px #0000004d;
-    border-radius: 5px;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: start;
-    row-gap: 10px;
-}
-form p {
-    width: 100%;
-    text-align: right;
-    margin: 0px;
-    font-size: 15px;
-    margin-top: 12px;
-}
-form div {
-    margin-top: 12px;
-}
-label {
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-}
-.required {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: baseline;
-    justify-items: end;
-    grid-column: 1 / -1;
-}
-.validation:invalid {
-    background-color: rgb(250, 228, 219);
-}
-.complete {
-    grid-column: 1 / -1;
-}
-.complete:disabled {
-    background-color: rgba(187, 187, 187, 0.582);
-    box-shadow: 0 1px 2px #0000004d;
-}
-.complete:hover {
-    box-shadow: 0 1px 2px #0000004d;
-}
-#order-info {
-    position: fixed;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    width: fit-content;
-    padding: 20px 30px;
-    background-color: aliceblue;
-    border-radius: 5px;
-    filter: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 1px 2px #0000004d;
-}
-.blurred {
-    background-color: rgba(142, 127, 150, 0.397);
-    filter: blur(2px);
-}
-.home-btn {
-    margin-top: 25px;
+.close-btn span {
+  font-size: 20px;
+  color: rgb(172, 37, 37);
 }
