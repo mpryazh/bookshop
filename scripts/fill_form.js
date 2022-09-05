@@ -2,7 +2,7 @@ import {
   createElement,
   createInput,
   createLabel,
-} from "/scripts/basic_functions.js";
+} from "./basic_functions.js";
 
 function fillForm(form) {
   const name_label = createLabel("name");

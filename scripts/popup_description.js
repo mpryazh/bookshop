@@ -1,4 +1,4 @@
-import { createElement, removeParent } from "/scripts/basic_functions.js";
+import { createElement, removeParent } from "./basic_functions.js";
 
 function getCoordinates(target) {
   let box = target.getBoundingClientRect();

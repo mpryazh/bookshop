@@ -1,6 +1,6 @@
-import { createElement } from "/scripts/basic_functions.js";
-import { createBooks } from "/scripts/create_books.js";
-import { addDragEvents } from "/scripts/drag_drop.js";
+import { createElement } from "./basic_functions.js";
+import { createBooks } from "./create_books.js";
+import { addDragEvents } from "./drag_drop.js";
 
 const fragment = new DocumentFragment();
 const header = createElement("header");

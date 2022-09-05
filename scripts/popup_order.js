@@ -1,4 +1,4 @@
-import { createElement } from "/scripts/basic_functions.js";
+import { createElement } from "./basic_functions.js";
 
 function popupOrder(e) {
   const orderInfo = document.createElement("div");

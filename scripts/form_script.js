@@ -1,7 +1,7 @@
-import { createElement } from "/scripts/basic_functions.js";
-import { fillForm } from "/scripts/fill_form.js";
-import { applyValidation } from "/scripts/validation.js";
-import { popupOrder } from "/scripts/popup_order.js";
+import { createElement } from "./basic_functions.js";
+import { fillForm } from "./fill_form.js";
+import { applyValidation } from "./validation.js";
+import { popupOrder } from "./popup_order.js";
 
 const fragment = new DocumentFragment();
 const header = document.createElement("header");

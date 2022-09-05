@@ -1,4 +1,4 @@
-import { addBookToCart } from "/scripts/order_books.js";
+import { addBookToCart } from "./order_books.js";
 
 let dragged;
 

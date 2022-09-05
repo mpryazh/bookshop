@@ -1,5 +1,5 @@
-import { createElement, removeParent } from "/scripts/basic_functions.js";
-import { confirmOrderBtn, emptyOrderMessage } from "/scripts/script.js";
+import { createElement, removeParent } from "./basic_functions.js";
+import { confirmOrderBtn, emptyOrderMessage } from "./script.js";
 
 function addBookToCart(target) {
   const card = getOrderCard(target);

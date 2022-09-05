@@ -1,12 +1,12 @@
-import { createElement } from "/scripts/basic_functions.js";
-import { popupDescription } from "/scripts/popup_description.js";
-import { dragStart } from "/scripts/drag_drop.js";
-import { addBookToCart } from "/scripts/order_books.js";
-import { bookCatalog } from "/scripts/script.js";
+import { createElement } from "./basic_functions.js";
+import { popupDescription } from "./popup_description.js";
+import { dragStart } from "./drag_drop.js";
+import { addBookToCart } from "./order_books.js";
+import { bookCatalog } from "./script.js";
 
 let books;
 async function getData() {
-  const response = await fetch("/assets/books.json");
+  const response = await fetch("../../assets/books.json");
   books = await response.json();
 }
 await getData();

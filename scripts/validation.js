@@ -1,4 +1,4 @@
-import { form } from "/scripts/form_script.js";
+import { form } from "./form_script.js";
 
 function setRequiredLabels() {
   const labels = document.querySelectorAll("label");
