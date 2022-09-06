@@ -20,7 +20,9 @@ function dragOver(e) {
 
 function dragLeave(e) {
   e.preventDefault;
-  this.classList.remove("hovered");
+  if (e.target.matches("div#order-container")) {
+    this.classList.remove("hovered");
+  }
 }
 
 function dragDrop() {

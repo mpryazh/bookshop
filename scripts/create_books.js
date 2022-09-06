@@ -18,6 +18,7 @@ function createBooks() {
     bookCard.addEventListener("dragstart", dragStart);
 
     const image = createElement("img");
+    image.draggable = false;
     image.setAttribute("src", `../../${book.imageLink}`);
     image.setAttribute("alt", book.title);
     const bookInfo = createElement("div", "book-info");
