@@ -1,32 +1,8 @@
-:root {
-  --green: rgba(91, 201, 47, 0.801);
-  --black: rgb(58, 58, 58);
-  --gray: rgb(219, 219, 219);
-}
-body {
-  font-family: "Noto Sans", sans-serif;
-  background: rgb(253, 248, 248);
-  color: var(--black);
+header {
+  background-color: transparent;
 }
 h1 {
-  text-align: center;
-  color: var(--green);
-  letter-spacing: 0.05rem;
-  margin: 30px auto;
-}
-h2 {
-  font-weight: 500;
-  line-height: 1.2em;
-  margin: 0;
-}
-h3 {
-  font-weight: 500;
-  font-size: 13px;
-  margin: 0;
-}
-p {
-  font-size: 11px;
-  margin: 0;
+  color: var(--green)
 }
 input {
   display: block;
@@ -114,20 +90,6 @@ pre {
   letter-spacing: 0.03rem;
   line-height: 23px;
   margin: 0;
-}
-.green-btn {
-  background-color: var(--green);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  padding: 10px 20px;
-  font-family: "Noto Sans", sans-serif;
-  font-size: 15px;
-}
-.green-btn:hover {
-  background-color: rgb(127, 224, 89);
-  box-shadow: 0 1px 2px #0000004d;
 }
 .complete {
   grid-column: 1 / -1;

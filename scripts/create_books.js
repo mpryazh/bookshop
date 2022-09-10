@@ -1,38 +1,37 @@
-import { createElement } from "./basic_functions.js";
+import { createElem } from "./basic_functions.js";
 import { popupDescription } from "./popup_description.js";
 import { dragStart } from "./drag_drop.js";
 import { addBookToCart } from "./order_books.js";
 import { bookCatalog } from "./script.js";
 
-let books;
-async function getData() {
+async function getBooksData() {
   const response = await fetch("../../assets/books.json");
-  books = await response.json();
+  let books = await response.json();
+  createBooks(books);
 }
-await getData();
 
-function createBooks() {
+function createBooks(books) {
   for (const book of books) {
-    const bookCard = createElement("figure", "book-card");
+    const bookCard = createElem("figure", "book-card");
     bookCard.draggable = "true";
     bookCard.addEventListener("dragstart", dragStart);
 
-    const image = createElement("img");
+    const image = createElem("img");
     image.draggable = false;
     image.setAttribute("src", `../../${book.imageLink}`);
     image.setAttribute("alt", book.title);
-    const bookInfo = createElement("div", "book-info");
-    const author = createElement("p", "", `${book.author}`);
-    const title = createElement("h3", "", `${book.title}`);
+    const bookInfo = createElem("div", "book-info");
+    const author = createElem("p", "", `${book.author}`);
+    const title = createElem("h3", "", `${book.title}`);
 
-    const learnMore = createElement("button", "learn-more", "Learn more");
+    const learnMore = createElem("button", "learn-more", "Learn more");
     learnMore.addEventListener("click", (event) =>
       popupDescription(event.target, book)
     );
 
-    const bookPrice = createElement("h3", "book-price", `$${book.price}`);
+    const bookPrice = createElem("h3", "book-price", `$${book.price}`);
 
-    const addToCart = createElement(
+    const addToCart = createElem(
       "button",
       "add-to-cart green-btn",
       "Add to cart"
@@ -49,4 +48,4 @@ function createBooks() {
   }
 }
 
-export { createBooks };
+export { getBooksData };

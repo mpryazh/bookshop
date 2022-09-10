@@ -1,62 +1,70 @@
-import { createElement, removeParent } from "./basic_functions.js";
-import { confirmOrderBtn, emptyOrderMessage } from "./script.js";
+import { createElem } from "./basic_functions.js";
+import {
+  confirmOrderBtn,
+  emptyOrderMessage,
+  orderContainer,
+} from "./script.js";
 
 function addBookToCart(target) {
-  const card = getOrderCard(target);
-  const orderContainer = document.querySelector("#order-container");
-  orderContainer.append(card);
+  const orderCard = createOrderCard(target);
+  orderContainer.append(orderCard);
+  updateOrderInfo();
+}
 
-  calculateSum();
-  unhide(sum);
-  unhide(confirmOrderBtn);
-  hide(emptyOrderMessage);
+function updateOrderInfo() {
+  const sum = document.querySelector("#sum");
+  const totalSum = calculateSum(sum);
+
+  if (totalSum == 0) {
+    hide(sum);
+    hide(confirmOrderBtn);
+    unhide(emptyOrderMessage);
+  } else {
+    unhide(sum);
+    unhide(confirmOrderBtn);
+    hide(emptyOrderMessage);
+  }
 }
 
 function hide(element) {
-  element.className += " hidden";
+  element.classList.add("hidden");
 }
 
 function unhide(element) {
   element.classList.remove("hidden");
 }
 
-function getOrderCard(target) {
-  const figure = target.closest("figure");
-  const orderCard = figure.cloneNode(true);
-  orderCard.className += " order-book-card";
-  addDeleteButton(orderCard);
+function createOrderCard(target) {
+  const orderCard = target.closest(".book-card").cloneNode(true);
+  orderCard.classList.add("order-book-card");
+
+  const deleteBtn = createDeleteButton();
+
+  orderCard.append(deleteBtn);
 
   return orderCard;
 }
 
-function addDeleteButton(card) {
-  const deleteButton = createElement("button", "delete-button");
-  const deleteIcon = createElement(
-    "span",
-    "material-symbols-outlined",
-    "delete"
-  );
+function createDeleteButton() {
+  const deleteButton = createElem("button", "delete-button");
+  const deleteIcon = createElem("span", "material-symbols-outlined", "delete");
   deleteButton.append(deleteIcon);
 
-  deleteButton.addEventListener("click", (event) =>
-    removeParent(event.target, "figure")
-  );
-  deleteButton.addEventListener("click", calculateSum);
-
-  card.append(deleteButton);
+  deleteButton.addEventListener("click", (event) => {
+    event.target.closest(".order-book-card").remove();
+    updateOrderInfo();
+  });
+  return deleteButton;
 }
 
-function calculateSum() {
+function calculateSum(sum) {
   const prices = document.querySelectorAll(".order-book-card .book-price");
-  let total_sum = 0;
-  prices.forEach((price) => (total_sum += +price.textContent.slice(1)));
-  sum.textContent = `Total: $${total_sum}`;
 
-  if (total_sum == 0) {
-    hide(sum);
-    hide(confirmOrderBtn);
-    unhide(emptyOrderMessage);
-  }
+  const totalSum = Array.from(prices).reduce(
+    (acc, curr) => acc + +curr.textContent.slice(1), 0);
+
+  sum.textContent = `Total: $${totalSum}`;
+  return totalSum;
 }
 
 export { addBookToCart };

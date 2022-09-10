@@ -1,4 +1,53 @@
-import { form } from "./form_script.js";
+import { submit } from "./form_script.js";
+
+function applyValidation(form) {
+  form.addEventListener(
+    "input",
+    function (e) {
+      e.target.setCustomValidity("");
+    },
+    true
+  );
+
+  form.addEventListener(
+    "blur",
+    function (e) {
+      e.target.classList.add("validation");
+      if (!e.target.checkValidity()) {
+        e.target.setCustomValidity("Field is invalid");
+        e.target.reportValidity();
+      }
+    },
+    true
+  );
+
+  // move focus to next field on enter
+  form.addEventListener("keydown", function (e) {
+    if (e.key == "Enter") {
+      e.preventDefault();
+      if (e.target.type == "submit") {
+        submit(e);
+        return true;
+      }
+      const index = Array.prototype.indexOf.call(form, e.target);
+      form.elements[index + 1].focus();
+    }
+  });
+
+  // enable complete button when all required fields are filled
+  setRequiredLabels();
+  const requiredInputs = document.querySelectorAll("input:required");
+  for (const field of requiredInputs) {
+    field.addEventListener("input", buttonState);
+  }
+
+  function buttonState() {
+    const completeBtn = document.querySelector(".complete");
+    completeBtn.disabled = Array.from(requiredInputs).some(
+      (x) => x.value === "" || !x.checkValidity()
+    );
+  }
+}
 
 function setRequiredLabels() {
   const labels = document.querySelectorAll("label");
@@ -14,45 +63,4 @@ function setRequiredLabels() {
   }
 }
 
-function applyValidation(inputs) {
-  inputs.forEach((input) =>
-    input.addEventListener("input", function (e) {
-      e.target.setCustomValidity("");
-    })
-  );
-  inputs.forEach((input) =>
-    input.addEventListener("blur", function (e) {
-      e.target.classList = "validation";
-      if (!e.target.checkValidity()) {
-        e.target.setCustomValidity("Field is invalid");
-        e.target.reportValidity();
-      }
-    })
-  );
-
-  // move focus to next field on enter
-  inputs.forEach((input) =>
-    input.addEventListener("keydown", function (e) {
-      if (e.key == "Enter") {
-        e.preventDefault();
-        const index = Array.prototype.indexOf.call(form, e.target);
-        form.elements[index + 1].focus();
-      }
-    })
-  );
-
-  // enable complete button when all required fields are filled
-  setRequiredLabels();
-  const requiredInputs = document.querySelectorAll("input:required");
-  for (const field of requiredInputs) {
-    field.addEventListener("input", buttonState);
-  }
-
-  function buttonState() {
-    const completeBtn = document.querySelector(".complete");
-    completeBtn.disabled = Array.from(requiredInputs).some(
-      (x) => x.value === ""
-    );
-  }
-}
 export { applyValidation };

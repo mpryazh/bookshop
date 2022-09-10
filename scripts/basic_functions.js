@@ -1,4 +1,4 @@
-function createElement(tag, classes = "", content = "") {
+function createElem(tag, classes = "", content = "") {
   let element = document.createElement(tag);
   element.className = classes;
   element.textContent = content;
@@ -6,11 +6,7 @@ function createElement(tag, classes = "", content = "") {
   return element;
 }
 
-function removeParent(target, parent) {
-  target.closest(parent).remove();
-}
-
-function createInput(id, type, pattern = "", name = id) {
+function createInputShort(id, type, pattern = "", name = id) {
   const input = document.createElement("input");
   input.id = id;
   input.name = name;
@@ -21,7 +17,7 @@ function createInput(id, type, pattern = "", name = id) {
   return input;
 }
 
-function createLabel(id) {
+function createLabelShort(id) {
   let label = document.createElement("label");
   label.for = id;
   label.textContent = id[0].toUpperCase() + id.slice(1);
@@ -29,4 +25,4 @@ function createLabel(id) {
   return label;
 }
 
-export { createElement, removeParent, createInput, createLabel };
+export { createElem, createInputShort, createLabelShort };

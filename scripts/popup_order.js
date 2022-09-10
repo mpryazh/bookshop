@@ -1,18 +1,18 @@
-import { createElement } from "./basic_functions.js";
+import { createElem } from "./basic_functions.js";
 
-function popupOrder(e) {
+function popupOrder(form) {
   const orderInfo = document.createElement("div");
   orderInfo.id = "order-info";
 
   const info = document.createElement("pre");
   info.textContent = `
-      ${e.target.elements.name.value} ${e.target.elements.surname.value},
+      ${form.elements.name.value} ${form.elements.surname.value},
       your order is created \n 
       The delivery address is: 
-      ${e.target.elements.street.value} street, ${e.target.elements.house.value}, apt ${e.target.elements.flat.value} \n
+      ${form.elements.street.value} street, ${form.elements.house.value}, apt ${form.elements.flat.value} \n
       `;
 
-  const homeBtn = createElement(
+  const homeBtn = createElem(
     "button",
     "home-btn confirm-order green-btn",
     "Back to shop"

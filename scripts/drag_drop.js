@@ -15,7 +15,7 @@ function dragStart(e) {
 
 function dragOver(e) {
   e.preventDefault();
-  this.className = "hovered";
+  this.classList.add("hovered");
 }
 
 function dragLeave(e) {

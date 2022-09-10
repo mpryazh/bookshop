@@ -1,39 +1,3 @@
-:root {
-  --green: rgba(91, 201, 47, 0.801);
-  --black: rgb(58, 58, 58);
-  --gray: rgb(219, 219, 219);
-}
-body {
-  font-family: "Noto Sans", sans-serif;
-  background: rgb(253, 248, 248);
-  color: var(--black);
-  margin: 0;
-}
-h1 {
-  text-align: center;
-  color: white;
-  letter-spacing: 0.05rem;
-}
-h2 {
-  font-weight: 500;
-  line-height: 1.2em;
-  margin: 0;
-}
-h3 {
-  font-weight: 500;
-  font-size: 13px;
-  margin: 0;
-}
-p {
-  font-size: 11px;
-  margin: 0;
-}
-header {
-  background-color: var(--green);
-  margin: 0;
-  padding: 1px;
-  margin-bottom: 20px;
-}
 main {
   display: flex;
   justify-content: space-evenly;
@@ -104,9 +68,6 @@ main {
 .hovered {
   background-color: antiquewhite;
 }
-.normal {
-  background-color: transparent;
-}
 #empty-order {
   font-size: 14px;
   text-align: center;
@@ -141,19 +102,6 @@ main {
   letter-spacing: 0.04rem;
   font-size: medium;
   font-family: "Noto Sans", sans-serif;
-}
-.green-btn {
-  background-color: var(--green);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  padding: 6px 15px;
-  font-family: "Noto Sans", sans-serif;
-}
-.green-btn:hover {
-  background-color: rgb(127, 224, 89);
-  box-shadow: 0 1px 2px #0000004d;
 }
 .add-to-cart {
   height: 30px;

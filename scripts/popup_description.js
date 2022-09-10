@@ -1,4 +1,4 @@
-import { createElement, removeParent } from "./basic_functions.js";
+import { createElem } from "./basic_functions.js";
 
 function getCoordinates(target) {
   let box = target.getBoundingClientRect();
@@ -23,15 +23,15 @@ function popupDescription(target, book) {
 }
 
 function createDescriptionDiv(description, title) {
-  const bookDescription = createElement("div", "book-description");
-  const descriptionContent = createElement("p", "", `${description}`);
-  const descriptionTitle = createElement("h3", "", `${title}`);
-  const closeButton = createElement("button", "close-btn");
-  const closeIcon = createElement("span", "material-symbols-outlined", "close");
+  const bookDescription = createElem("div", "book-description");
+  const descriptionContent = createElem("p", "", `${description}`);
+  const descriptionTitle = createElem("h3", "", `${title}`);
+  const closeButton = createElem("button", "close-btn");
+  const closeIcon = createElem("span", "material-symbols-outlined", "close");
   closeButton.append(closeIcon);
 
   closeButton.addEventListener("click", (event) =>
-    removeParent(event.target, ".book-description")
+    event.target.closest(".book-description").remove()
   );
 
   bookDescription.append(closeButton, descriptionTitle, descriptionContent);
