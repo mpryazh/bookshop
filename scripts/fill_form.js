@@ -1,4 +1,8 @@
-import { createElem, createInputShort, createLabelShort } from "./basic_functions.js";
+import {
+  createElem,
+  createInputShort,
+  createLabelShort,
+} from "./basic_functions.js";
 
 function fillForm(form) {
   const name_label = createLabelShort("name");
@@ -14,15 +18,23 @@ function fillForm(form) {
   delivery_label.append(delivery_input);
 
   // min delivery date = tomorrow
-  const today = new Date();
-  today.setDate(today.getDate() + 1);
-  let tomorrow = today.toLocaleDateString();
-  tomorrow = tomorrow.split(".").reverse().join("-");
-  delivery_input.value = tomorrow;
-  delivery_input.min = tomorrow;
+  let tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr =
+    tomorrow.getFullYear() +
+    "-" +
+    ("0" + (tomorrow.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("0" + tomorrow.getDate()).slice(-2);
+  delivery_input.value = tomorrowStr;
+  delivery_input.min = tomorrowStr;
 
   const street_label = createLabelShort("street");
-  const street_input = createInputShort("street", "text", "^[ a-zA-Z0-9]{5,25}");
+  const street_input = createInputShort(
+    "street",
+    "text",
+    "^[ a-zA-Z0-9]{5,25}"
+  );
   street_label.append(street_input);
 
   const house_label = createLabelShort("house");
@@ -31,7 +43,11 @@ function fillForm(form) {
   house_label.append(house_input);
 
   const flat_label = createLabelShort("flat");
-  const flat_input = createInputShort("flat", "text", "[1-9]([0-9]+)?(-[0-9]+)?");
+  const flat_input = createInputShort(
+    "flat",
+    "text",
+    "[1-9]([0-9]+)?(-[0-9]+)?"
+  );
   flat_label.append(flat_input);
 
   const paymentMethod = createElem("p", "", "Payment method");
