@@ -1,0 +1,156 @@
+main {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+.learn-more {
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  font-size: small;
+  color: rgb(126, 126, 126);
+  cursor: pointer;
+  font-style: italic;
+  padding: 0;
+}
+.learn-more:hover {
+  color: rgb(97, 23, 167);
+}
+#book-catalog {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 840px;
+  justify-content: center;
+}
+.book-card {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.719);
+  display: flex;
+  gap: 15px;
+  width: 320px;
+  margin: 10px;
+  border: 1px solid var(--gray);
+}
+.book-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 15px 0 0;
+}
+.book-info > div {
+  padding: 0;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.book-card img {
+  width: 120px;
+  align-self: center;
+}
+#your-order {
+  margin: 0px;
+  max-width: 550px;
+}
+#your-order > h2 {
+  text-align: center;
+}
+#order-container {
+  margin: 0px;
+  min-height: 140px;
+  min-width: 340px;
+  margin: 15px 0;
+}
+#order-container img {
+  width: 80px;
+}
+.hovered {
+  background-color: antiquewhite;
+}
+#empty-order {
+  font-size: 14px;
+  text-align: center;
+}
+.order-book-card .learn-more,
+.order-book-card .add-to-cart {
+  display: none;
+}
+.order-book-card {
+  margin: 0;
+  padding: 10px 5px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 0fr;
+  justify-content: space-between;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(219, 219, 219);
+}
+.order-book-card .book-info {
+  padding: 0;
+}
+.order-book-card .book-price {
+  font-size: small;
+}
+#order-container p {
+  margin: 0;
+}
+#sum {
+  text-align: right;
+  padding-right: 40px;
+  font-weight: 500;
+  letter-spacing: 0.04rem;
+  font-size: medium;
+  font-family: "Noto Sans", sans-serif;
+}
+.add-to-cart {
+  height: 30px;
+}
+.add-to-cart span {
+  padding-top: 4px;
+}
+.delete-button {
+  border: none;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  color: rgb(170, 11, 11);
+}
+.delete-button:hover {
+  color: rgb(219, 17, 17);
+}
+.delete-button span {
+  font-size: 20px;
+}
+.hidden {
+  display: none !important;
+}
+.confirm-order {
+  margin: auto;
+  margin-top: 20px;
+  padding: 10px 15px;
+  letter-spacing: 0.07em;
+  display: block;
+}
+.book-description {
+  background-color: rgb(253, 243, 251);
+  width: 300px;
+  padding: 25px 20px 20px;
+  box-shadow: 0 1px 2px #0000004d;
+  border-radius: 4px;
+}
+.book-description h3 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+.close-btn {
+  position: absolute;
+  right: 2px;
+  top: 5px;
+  border: none;
+  background-color: transparent;
+}
+.close-btn span {
+  font-size: 20px;
+  color: rgb(172, 37, 37);
+}
